@@ -1,0 +1,70 @@
+MORTGAGE LOAN APPLICATION — STAGE: APPLICATION SUBMITTED
+Loan ID: LN-2024-001
+Loan Type: FHA
+Stage: Application Submitted
+Submitted Date: 2024-03-01
+
+BORROWER INFORMATION
+Name: John Smith
+Date of Birth: 1985-03-15
+SSN: XXX-XX-1234
+Email: john.smith@email.com
+Phone: (512) 555-0101
+Marital Status: Married
+Dependents: 2
+
+EMPLOYMENT
+Employer: Tech Corp Austin
+Position: Software Engineer
+Employment Type: Full-time
+Years Employed: 4.5
+Annual Gross Income: $95,000
+Monthly Gross Income: $7,916
+
+FINANCIAL PROFILE
+Credit Score: 680
+Monthly Debt Payments:
+  - Car loan: $450/month
+  - Student loan: $280/month
+  - Credit cards: $150/month
+Total Monthly Debt: $880
+Debt-to-Income Ratio (DTI): 42.3%
+
+Assets:
+  - Checking account: $12,000
+  - Savings account: $28,000
+  - 401k: $45,000
+Total Assets: $85,000
+
+PROPERTY INFORMATION
+Property Address: 123 Oak St, Austin TX 78701
+Purchase Price: $320,000
+Down Payment: $11,200 (3.5% FHA minimum)
+Loan Amount Requested: $308,800
+Property Type: Single Family Residence
+Year Built: 1998
+Bedrooms: 3 | Bathrooms: 2
+
+FHA ELIGIBILITY ASSESSMENT
+- Credit score >= 580: PASS (680)
+- DTI <= 43%: PASS (42.3%)
+- Down payment >= 3.5%: PASS
+- Primary residence: CONFIRMED
+- MIP required: YES — Upfront $5,404 + Annual $1,699/yr
+
+DOCUMENTS CHECKLIST
+[X] Completed loan application (Form 1003)
+[X] Photo ID (Driver's License)
+[X] Pay stubs (30 days)
+[X] W-2 forms (2022, 2023)
+[ ] Federal tax returns (2022, 2023) — PENDING
+[X] Bank statements (2 months)
+[ ] Purchase contract — PENDING
+[ ] Property appraisal — NOT STARTED
+
+LOAN OFFICER NOTES
+Application received. Initial review shows borrower meets FHA minimum requirements.
+Credit score of 680 is above FHA minimum of 580.
+DTI of 42.3% is within FHA maximum of 43%.
+Missing tax returns must be submitted within 10 business days.
+Next step: Order property appraisal once purchase contract is received.

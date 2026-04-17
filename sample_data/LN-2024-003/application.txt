@@ -1,0 +1,76 @@
+MORTGAGE LOAN APPLICATION — STAGE: UNDERWRITING
+Loan ID: LN-2024-003
+Loan Type: VA (Veterans Affairs)
+Stage: Underwriting — In Review
+Submitted Date: 2024-01-10
+Underwriting Started: 2024-02-01
+
+BORROWER INFORMATION
+Name: Robert Johnson
+Date of Birth: 1978-11-30
+SSN: XXX-XX-9012
+Email: robert.johnson@email.com
+Phone: (210) 555-0303
+Marital Status: Married
+Dependents: 3
+Military Status: Honorably Discharged Veteran (US Army, 2000–2008)
+VA Certificate of Eligibility: Issued 2024-01-05 | Entitlement: Full
+
+EMPLOYMENT
+Employer: San Antonio Defense Contractors LLC
+Position: Project Manager
+Employment Type: Full-time (W-2)
+Years Employed: 6.1
+Annual Gross Income: $128,000
+Monthly Gross Income: $10,667
+
+FINANCIAL PROFILE
+Credit Score: 712
+Monthly Debt Payments:
+  - Auto loan: $520/month
+  - Credit cards (min): $120/month
+Total Monthly Debt: $640
+Proposed Housing Payment (PITI): $2,890
+Front-end DTI: 27.1%
+Back-end DTI: 33.1%
+Residual Income: $3,218/month (VA requirement for TX family of 5: $1,003 — PASS)
+
+Assets:
+  - Checking: $18,000
+  - Savings: $42,000
+  - TSP (Thrift Savings Plan): $187,000
+Total Assets: $247,000
+
+PROPERTY INFORMATION
+Property Address: 789 Pecan Blvd, San Antonio TX 78201
+Purchase Price: $425,000
+Down Payment: $0 (VA loan — no down payment required)
+Loan Amount Requested: $425,000
+VA Funding Fee: $7,437.50 (1.75% — first use, financed)
+Total Loan Amount: $432,437.50
+LTV: 100%
+Property Type: Single Family Residence
+Year Built: 2008
+
+VA LOAN ELIGIBILITY
+- Certificate of Eligibility: CONFIRMED
+- Entitlement available: $106,025 (full entitlement)
+- Loan within VA county limit: PASS ($833,550 for Bexar County)
+- Residual income test: PASS ($3,218 vs $1,003 minimum)
+- DTI <= 41% preferred: PASS (33.1%)
+- Primary residence: CONFIRMED
+
+UNDERWRITING CONDITIONS
+1. VA appraisal (NOV) ordered — IN REVIEW
+2. Verify 12-month mortgage/rental history — CLEAR
+3. Confirm no federal tax liens — CLEAR
+4. Child support verification letter — RECEIVED
+5. Explanation letter for 2022 employment gap (2 months) — RECEIVED
+   Borrower explanation: Medical leave, fully documented
+
+UNDERWRITER NOTES
+Loan package is strong. Veteran qualifies under all VA guidelines.
+Residual income significantly exceeds minimum threshold.
+Employment gap in 2022 is well-documented as medical leave — accepted.
+Awaiting VA appraisal NOV (Notice of Value) — ordered 2024-02-03.
+Recommended decision: APPROVE pending appraisal.

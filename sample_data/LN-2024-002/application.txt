@@ -1,0 +1,79 @@
+MORTGAGE LOAN APPLICATION — STAGE: DOCUMENT REVIEW
+Loan ID: LN-2024-002
+Loan Type: Conventional (Conforming)
+Stage: Document Review
+Submitted Date: 2024-02-15
+Review Started: 2024-02-20
+
+BORROWER INFORMATION
+Name: Maria Garcia
+Date of Birth: 1979-07-22
+SSN: XXX-XX-5678
+Email: maria.garcia@email.com
+Phone: (214) 555-0202
+Marital Status: Single
+Dependents: 1
+
+CO-BORROWER
+Name: Carlos Garcia (Brother)
+Annual Income: $62,000
+
+EMPLOYMENT
+Employer: Dallas Medical Center
+Position: Registered Nurse
+Employment Type: Full-time
+Years Employed: 8.2
+Annual Gross Income: $112,000
+Monthly Gross Income: $9,333
+
+FINANCIAL PROFILE
+Credit Score: 748
+Monthly Debt Payments:
+  - Auto lease: $380/month
+  - Student loan: $210/month
+Total Monthly Debt: $590
+Front-end DTI (housing only): 28.4%
+Back-end DTI (all debts): 34.7%
+
+Assets:
+  - Checking: $22,500
+  - Savings: $67,000
+  - Brokerage: $145,000
+  - 403b Retirement: $98,000
+Total Assets: $332,500
+
+PROPERTY INFORMATION
+Property Address: 456 Elm Ave, Dallas TX 75201
+Purchase Price: $540,000
+Down Payment: $108,000 (20% — avoids PMI)
+Loan Amount Requested: $432,000
+LTV Ratio: 80%
+Property Type: Single Family Residence
+Year Built: 2015
+Bedrooms: 4 | Bathrooms: 3
+
+CONVENTIONAL LOAN ASSESSMENT
+- Credit score >= 620: PASS (748 — excellent)
+- DTI <= 45%: PASS (34.7%)
+- Down payment >= 20%: PASS — PMI NOT required
+- Loan within conforming limit ($766,550): PASS ($432,000)
+- Reserves (2 months PITI): PASS — $22,500 available
+
+DOCUMENTS CHECKLIST
+[X] Completed loan application (Form 1003)
+[X] Photo ID
+[X] Pay stubs (30 days — verified)
+[X] W-2 forms (2022, 2023 — verified)
+[X] Federal tax returns (2022, 2023 — received, under review)
+[X] Bank statements (3 months — verified)
+[X] Brokerage statements
+[X] Purchase contract (signed 2024-02-12)
+[X] Co-borrower application and income docs
+[ ] Property appraisal — ORDERED, awaiting report
+[ ] Title search — IN PROGRESS
+
+DOCUMENT REVIEW NOTES
+All income documents received and verified. Tax returns show consistent income over 2 years.
+Large deposit flagged: $15,000 deposit on 2024-01-05 — borrower provided gift letter from parents.
+Appraisal ordered 2024-02-22, expected completion 2024-03-01.
+Co-borrower income increases qualifying amount. Both borrowers have clean credit histories.

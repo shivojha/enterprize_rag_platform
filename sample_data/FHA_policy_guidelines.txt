@@ -1,0 +1,54 @@
+FHA LOAN UNDERWRITING GUIDELINES
+Effective Date: January 1, 2024
+Source: HUD Handbook 4000.1
+
+CREDIT SCORE REQUIREMENTS
+- Minimum credit score of 580: eligible for 3.5% down payment
+- Credit score 500-579: eligible for 10% down payment only
+- Credit score below 500: NOT eligible for FHA financing
+
+DEBT-TO-INCOME (DTI) REQUIREMENTS
+- Front-end DTI (housing expenses only): maximum 31%
+- Back-end DTI (all debts): maximum 43%
+- Exception: DTI up to 57% may be allowed with compensating factors:
+  * Verified cash reserves (3+ months PITI)
+  * Minimal payment shock (<5% increase in housing payment)
+  * Residual income meeting VA guidelines
+
+DOWN PAYMENT REQUIREMENTS
+- Minimum 3.5% for credit scores >= 580
+- Minimum 10% for credit scores 500-579
+- Down payment sources: personal savings, gift funds, grants
+
+MORTGAGE INSURANCE PREMIUM (MIP)
+- Upfront MIP: 1.75% of base loan amount
+- Annual MIP: 0.55% for loans > 15 years with LTV > 90%
+- MIP duration: Life of loan if down payment < 10%
+
+PROPERTY ELIGIBILITY
+- Must be borrower's primary residence
+- Must meet FHA minimum property standards (MPS)
+- Property types: SFR, 2-4 units, condos (FHA-approved), manufactured homes
+- Maximum loan limits vary by county (2024 Austin TX: $531,250)
+
+EMPLOYMENT AND INCOME
+- Minimum 2-year employment history required
+- Self-employed: 2 years federal tax returns required
+- Gap in employment > 6 months: must document and explain
+- Commission income: 2-year average used for qualifying
+
+REQUIRED DOCUMENTATION
+1. Completed Uniform Residential Loan Application (Form 1003)
+2. W-2 statements for the past 2 years
+3. Federal income tax returns for the past 2 years
+4. Pay stubs covering most recent 30-day period
+5. Bank statements for most recent 2 months (all accounts)
+6. Gift letter (if using gift funds for down payment)
+7. Copy of signed purchase contract
+8. Photo ID
+
+APPRAISAL REQUIREMENTS
+- FHA-approved appraiser required
+- Must meet HUD Minimum Property Requirements
+- Appraised value must support purchase price
+- If repairs required: must be completed before closing OR escrow holdback

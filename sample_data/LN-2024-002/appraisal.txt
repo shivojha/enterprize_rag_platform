@@ -1,0 +1,53 @@
+PROPERTY APPRAISAL REPORT
+Loan ID: LN-2024-002
+Appraiser: James W. Henderson, MAI
+License: TX-1234567
+Appraisal Date: 2024-02-28
+Report Date: 2024-03-01
+
+SUBJECT PROPERTY
+Address: 456 Elm Ave, Dallas TX 75201
+Legal Description: Lot 14, Block 3, Elmwood Estates Subdivision
+County: Dallas
+Zoning: R-1 Single Family Residential
+Property Rights: Fee Simple
+
+PROPERTY DESCRIPTION
+Type: Single Family Residence
+Year Built: 2015
+Gross Living Area: 2,847 sq ft
+Lot Size: 7,200 sq ft
+Bedrooms: 4 | Bathrooms: 3 full
+Garage: 2-car attached
+Condition: C2 (Good)
+Quality: Q3 (Average)
+
+COMPARABLE SALES ANALYSIS
+Comp 1: 448 Elm Ave, Dallas TX — Sold $535,000 (2024-01-15) — 2,790 sqft
+Comp 2: 512 Oak Blvd, Dallas TX — Sold $549,000 (2024-01-28) — 2,910 sqft
+Comp 3: 389 Maple St, Dallas TX — Sold $528,000 (2023-12-10) — 2,780 sqft
+
+ADJUSTMENTS
+Comp 1: +$4,200 (GLA difference) = $539,200
+Comp 2: -$3,500 (superior garage) = $545,500
+Comp 3: +$6,800 (time adjustment 3 months) = $534,800
+
+APPRAISED VALUE: $545,000
+
+LENDER REQUIREMENTS
+Purchase Price: $540,000
+Appraised Value: $545,000
+Value Supports Purchase Price: YES
+LTV Based on Appraised Value: 79.3%
+
+PROPERTY CONDITION
+No deferred maintenance observed.
+Roof: Architectural shingle, estimated 6 years remaining useful life.
+HVAC: Replaced 2021, functional.
+Plumbing/Electrical: Updated 2015, no issues.
+Foundation: Slab, no cracks or settlement observed.
+FHA/Conventional Minimum Property Standards: MET
+
+APPRAISER CERTIFICATION
+I certify this appraisal was performed in accordance with USPAP standards.
+The property value of $545,000 is my independent professional opinion.

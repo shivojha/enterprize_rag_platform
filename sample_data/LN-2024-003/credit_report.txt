@@ -1,0 +1,61 @@
+CREDIT REPORT SUMMARY
+Loan ID: LN-2024-003
+Borrower: Robert Johnson
+Report Date: 2024-01-15
+Reporting Agencies: Equifax, Experian, TransUnion
+
+CREDIT SCORES
+Equifax: 718
+Experian: 712
+TransUnion: 706
+Middle Score Used for Qualification: 712
+
+CREDIT HISTORY SUMMARY
+Total Accounts: 12
+Open Accounts: 7
+Closed Accounts: 5
+Derogatory Marks: 0
+Bankruptcies: None
+Foreclosures: None
+Collections: None
+
+PAYMENT HISTORY
+On-time payments (last 24 months): 100%
+Late payments (30 days): 0
+Late payments (60 days): 0
+Late payments (90+ days): 0
+
+TRADE LINES
+1. Capital One Auto Finance
+   Balance: $18,200 | Limit: N/A | Monthly: $520
+   Status: Current | Opened: 2021 | History: Perfect
+
+2. Chase Visa Credit Card
+   Balance: $2,400 | Limit: $12,000 | Utilization: 20%
+   Monthly Min: $48 | Status: Current | History: Perfect
+
+3. American Express
+   Balance: $1,850 | Limit: $10,000 | Utilization: 18.5%
+   Monthly Min: $37 | Status: Current | History: Perfect
+
+4. Discover Card
+   Balance: $0 | Limit: $7,500 | Utilization: 0%
+   Status: Current | Opened: 2015 | History: Perfect
+
+5. Previous Mortgage (sold)
+   Original Balance: $185,000 | Payoff: 2019
+   Status: Paid/Closed | History: Perfect
+
+CREDIT UTILIZATION
+Total Revolving Limit: $29,500
+Total Revolving Balance: $4,250
+Utilization Rate: 14.4% (Excellent — below 30% guideline)
+
+PUBLIC RECORDS
+Federal Tax Liens: NONE
+State Tax Liens: NONE
+Judgments: NONE
+Bankruptcies: NONE
+
+CREDIT INQUIRIES (last 12 months)
+Hard Inquiries: 2 (both mortgage-related, per RESPA)

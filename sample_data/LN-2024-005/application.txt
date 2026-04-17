@@ -1,0 +1,85 @@
+MORTGAGE LOAN APPLICATION — STAGE: CLOSING
+Loan ID: LN-2024-005
+Loan Type: FHA (Streamline Refinance)
+Stage: Closing Scheduled
+Closing Date: 2024-03-20
+Closing Attorney: Hendricks Title & Escrow, Austin TX
+
+BORROWER INFORMATION
+Name: Michael Brown
+Date of Birth: 1975-05-28
+SSN: XXX-XX-7890
+Email: michael.brown@email.com
+Phone: (512) 555-0505
+Marital Status: Divorced
+Dependents: 1 (shared custody)
+
+EMPLOYMENT
+Employer: Austin Independent School District
+Position: High School Principal
+Employment Type: Full-time (Government)
+Years Employed: 11.3
+Annual Gross Income: $98,500
+Monthly Gross Income: $8,208
+
+FINANCIAL PROFILE
+Credit Score: 695
+Monthly Debt:
+  - Child support: $600/month
+  - Auto loan: $375/month
+Total Monthly Debt: $975
+Current Housing Payment: $1,650/month (existing FHA loan being refinanced)
+New Housing Payment: $1,498/month
+Payment Reduction: $152/month
+DTI (new): 30.2%
+
+Assets:
+  - Checking: $9,800
+  - Savings: $31,500
+  - TRS Pension (Texas Teacher Retirement): $225,000
+Total Assets: $266,300
+
+PROPERTY INFORMATION (Existing/Refinance)
+Property Address: 567 Birch Lane, Austin TX 78745
+Current Appraised Value: $385,000 (from 2021 purchase appraisal)
+Current Loan Balance: $287,400
+New Loan Amount: $291,250 (includes financed closing costs)
+New LTV: 75.6%
+Property Type: Single Family Residence
+Year Built: 2001
+
+FHA STREAMLINE REFINANCE — NET TANGIBLE BENEFIT
+Original Rate: 6.875%
+New Rate: 5.99%
+Rate Reduction: 0.885%
+Monthly Payment Reduction: $152
+FHA Net Tangible Benefit Test: PASS (rate drops > 0.5%)
+
+CLOSING DISCLOSURE (CD) SUMMARY
+Loan Amount: $291,250
+Interest Rate: 5.99% (30-year fixed)
+Monthly P&I: $1,745
+Estimated Monthly Payment (PITI): $1,498
+Closing Costs Total: $5,840
+  - Origination fee: $1,456
+  - Title insurance: $1,200
+  - Recording fees: $185
+  - Prepaid interest (10 days): $488
+  - Escrow setup (taxes/insurance): $2,511
+Cash to Close: $1,200 (after seller credit)
+
+CLOSING CHECKLIST
+[X] Clear to Close (CTC) issued: 2024-03-15
+[X] Closing Disclosure sent to borrower (3-day waiting period complete)
+[X] Homeowner's insurance binder received
+[X] Final title search — CLEAR
+[X] Flood certification — Zone X (no flood insurance required)
+[X] Final loan approval confirmed
+[ ] Closing appointment: 2024-03-20 at 10:00 AM
+[ ] Wire transfer from borrower: $1,200 due at closing
+[ ] Deed of trust recording (post-closing)
+
+CLOSING AGENT NOTES
+All conditions satisfied. Borrower has been briefed on closing documents.
+3-day rescission period applies (refinance). Effective date: 2024-03-23.
+First new payment due: 2024-05-01.

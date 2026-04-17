@@ -1,0 +1,54 @@
+MORTGAGE LOAN APPLICATION
+Loan ID: LN-2024-001
+Loan Type: FHA
+
+BORROWER INFORMATION
+Name: John Smith
+Date of Birth: 1985-03-15
+SSN: XXX-XX-1234
+Email: john.smith@email.com
+Phone: (512) 555-0101
+
+EMPLOYMENT
+Employer: Tech Corp Austin
+Employment Type: Full-time
+Years Employed: 4.5
+Annual Gross Income: $95,000
+Monthly Gross Income: $7,916
+
+FINANCIAL PROFILE
+Credit Score: 680
+Monthly Debt Payments:
+  - Car loan: $450/month
+  - Student loan: $280/month
+  - Credit cards: $150/month
+Total Monthly Debt: $880
+Debt-to-Income Ratio (DTI): 42.3%
+
+Assets:
+  - Checking account: $12,000
+  - Savings account: $28,000
+  - 401k: $45,000
+Total Assets: $85,000
+
+PROPERTY INFORMATION
+Property Address: 123 Oak St, Austin TX 78701
+Purchase Price: $320,000
+Down Payment: $11,200 (3.5% - FHA minimum)
+Loan Amount Requested: $308,800
+Property Type: Single Family Residence
+Year Built: 1998
+
+FHA ELIGIBILITY NOTES
+- Minimum credit score for FHA: 580 (PASS - score is 680)
+- Maximum DTI for FHA: 43% (PASS - DTI is 42.3%)
+- Minimum down payment 3.5% for score >= 580 (PASS)
+- Property must be primary residence (CONFIRMED)
+- MIP (Mortgage Insurance Premium) required: YES
+
+DOCUMENTS REQUIRED
+[X] W-2 forms (2 years)
+[ ] Federal tax returns (2 years) - MISSING
+[X] Pay stubs (30 days)
+[X] Bank statements (2 months)
+[ ] Gift letter (if applicable) - NOT APPLICABLE

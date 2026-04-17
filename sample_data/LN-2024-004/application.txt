@@ -1,0 +1,89 @@
+MORTGAGE LOAN APPLICATION — STAGE: APPROVED
+Loan ID: LN-2024-004
+Loan Type: Conventional (Jumbo)
+Stage: Approved — Awaiting Closing Date
+Approved Date: 2024-03-05
+Expiry of Approval: 2024-06-05 (90 days)
+
+BORROWER INFORMATION
+Name: Sarah Chen
+Date of Birth: 1982-09-14
+SSN: XXX-XX-3456
+Email: sarah.chen@email.com
+Phone: (713) 555-0404
+Marital Status: Married
+Dependents: 0
+
+CO-BORROWER
+Name: David Chen (Spouse)
+Annual Income: $145,000
+
+EMPLOYMENT — PRIMARY BORROWER
+Employer: Chen & Associates Law Firm (Self-owned)
+Position: Managing Partner
+Employment Type: Self-employed
+Years Self-employed: 5
+2022 Net Business Income: $298,000
+2023 Net Business Income: $321,000
+2-Year Average Income Used: $309,500/yr | $25,792/month
+
+EMPLOYMENT — CO-BORROWER
+Employer: Houston Energy Corp
+Position: Senior Petroleum Engineer
+Employment Type: Full-time
+Years Employed: 9
+Annual Gross Income: $145,000
+
+COMBINED HOUSEHOLD INCOME: $454,500/yr
+
+FINANCIAL PROFILE
+Primary Credit Score: 798
+Co-Borrower Credit Score: 782
+Monthly Debt:
+  - Luxury auto lease: $1,100/month
+  - Investment property mortgage: $2,200/month (rental income $2,800 offsets)
+  - Credit cards: $0 balance (paid monthly)
+Net Monthly Debt (after rental offset): $1,100
+Combined DTI: 29.2%
+
+Assets:
+  - Primary checking: $85,000
+  - Joint savings: $320,000
+  - Investment portfolio: $1,240,000
+  - 401k/IRA combined: $890,000
+  - Investment property equity: $310,000
+Total Net Worth: $2,845,000
+
+PROPERTY INFORMATION
+Property Address: 1201 River Oaks Blvd, Houston TX 77019
+Purchase Price: $1,850,000
+Down Payment: $370,000 (20%)
+Loan Amount Requested: $1,480,000
+LTV: 80%
+Property Type: Single Family Residence (Luxury)
+Year Built: 2019
+Bedrooms: 5 | Bathrooms: 4.5
+Pool: Yes | Smart Home: Yes
+
+JUMBO LOAN APPROVAL SUMMARY
+Loan exceeds conforming limit of $766,550 — classified as Jumbo
+Rate: 7.125% (30-year fixed, jumbo rate)
+Monthly P&I: $9,971
+Monthly PITI (with tax/insurance): $12,350
+Reserves required: 12 months ($148,200) — PASS, $405,000 available
+
+APPROVAL CONDITIONS MET
+[X] Credit score >= 720 (both borrowers): PASS (798/782)
+[X] DTI <= 43%: PASS (29.2%)
+[X] 20% down payment: PASS
+[X] 12-month reserves: PASS
+[X] 2-year self-employment with tax returns: PASS
+[X] Appraisal at $1,875,000: PASS (supports purchase price)
+[X] No gift funds (jumbo restriction): PASS — own funds only
+[X] Title search clear: PASS
+
+FINAL APPROVAL LETTER
+This loan has been fully approved by the underwriting committee.
+Clear to Close (CTC) issued: 2024-03-05
+Closing can be scheduled upon borrower confirmation.
+Rate lock expires: 2024-04-05 (30-day lock)

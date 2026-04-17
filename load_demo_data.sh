@@ -3,7 +3,7 @@
 set -e
 
 API="http://localhost:8002"
-DATA="./data/sample_loans"
+DATA="./sample_data"
 
 echo "================================"
 echo " Loading Demo Mortgage Data"
