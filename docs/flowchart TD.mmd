@@ -1,0 +1,55 @@
+flowchart TD
+    subgraph Client["Client"]
+        UI["Browser UI (React + Vite :5174)"]
+    end
+
+    subgraph API["FastAPI :8002 (Python 3.11)"]
+        IE["/ingest/{loan_id}"]
+        QE["/query"]
+        SE["/loans/{loan_id}/status"]
+    end
+
+    subgraph Orchestrator["LangGraph Orchestrator (langgraph 0.2)"]
+        N1["embed_query (sentence-transformers)"]
+        N2["retrieve_chunks (qdrant-client)"]
+        N3["build_context"]
+        N4{{"should_generate?"}}
+        N5["generate_answer (httpx → Ollama)"]
+        N6["no_context"]
+        N1 --> N2 --> N3 --> N4
+        N4 -->|"chunks found"| N5
+        N4 -->|"empty"| N6
+    end
+
+    subgraph Queue["Async Layer"]
+        RD["Redis :6380 (redis:7-alpine)"]
+        WK["Celery Worker (celery 5.4)\nPDF Parser + Embedder"]
+    end
+
+    subgraph Storage["Storage"]
+        QD["Qdrant :6334 (qdrant/qdrant)\nVector DB — cosine similarity"]
+        PG["PostgreSQL :5433 (postgres:16-alpine)\nMetadata · Loans · Query Log"]
+    end
+
+    subgraph LLM["LLM Layer"]
+        OL["Ollama :11435 (ollama/ollama)\nMistral 7B — CPU inference\nnum_thread=4, num_predict=300"]
+    end
+
+    subgraph Observability["Observability"]
+        LF["LangFuse :3002 (langfuse/langfuse:2)\nTraces · Spans · Latency · Token counts"]
+    end
+
+    UI -->|"POST /ingest"| IE
+    UI -->|"POST /query"| QE
+    UI -->|"GET /status"| SE
+
+    IE -->|"celery.send_task"| RD
+    RD -->|"dequeue"| WK
+    WK -->|"upsert vectors\n(all-MiniLM-L6-v2, 384-dim)"| QD
+    WK -->|"UPDATE doc status"| PG
+
+    QE --> Orchestrator
+    N2 -->|"ANN search\ntop_k=3, score>0.3"| QD
+    N5 -->|"POST /api/generate"| OL
+    Orchestrator -->|"INSERT query_log"| PG
+    Orchestrator -->|"trace + spans"| LF

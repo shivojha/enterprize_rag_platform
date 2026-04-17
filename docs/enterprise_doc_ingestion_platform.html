@@ -1,0 +1,921 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans, 'Segoe UI', sans-serif); background: transparent; color: var(--color-text-primary); }
+
+  .nav { display: flex; gap: 4px; flex-wrap: wrap; padding: 0 0 20px; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 24px; }
+  .nav-btn { padding: 6px 14px; font-size: 12px; font-weight: 500; border: 0.5px solid var(--color-border-tertiary); border-radius: 20px; cursor: pointer; background: transparent; color: var(--color-text-secondary); transition: all .15s; }
+  .nav-btn.active, .nav-btn:hover { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-secondary); }
+  .nav-btn.active { border-color: #3B8BD4; color: #185FA5; }
+
+  .section { display: none; animation: fadeIn .2s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  h2 { font-size: 15px; font-weight: 500; margin-bottom: 6px; color: var(--color-text-primary); }
+  h3 { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .05em; }
+  p { font-size: 13px; line-height: 1.6; color: var(--color-text-secondary); margin-bottom: 12px; }
+
+  /* Architecture diagram tiles */
+  .arch-grid { display: grid; grid-template-columns: 1fr; gap: 2px; }
+  .arch-layer { display: grid; gap: 2px; }
+  .arch-layer-2 { grid-template-columns: 1fr 1fr; }
+  .arch-layer-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .arch-layer-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .arch-layer-5 { grid-template-columns: repeat(5, 1fr); }
+
+  .tile { padding: 10px 12px; border-radius: 6px; cursor: pointer; transition: all .15s; position: relative; }
+  .tile:hover { filter: brightness(1.05); transform: translateY(-1px); }
+  .tile-label { font-size: 11px; font-weight: 500; margin-bottom: 2px; }
+  .tile-sub { font-size: 10px; opacity: .75; }
+
+  .t-blue   { background: #E6F1FB; color: #0C447C; border: 0.5px solid #B5D4F4; }
+  .t-teal   { background: #E1F5EE; color: #085041; border: 0.5px solid #9FE1CB; }
+  .t-purple { background: #EEEDFE; color: #3C3489; border: 0.5px solid #CECBF6; }
+  .t-amber  { background: #FAEEDA; color: #633806; border: 0.5px solid #FAC775; }
+  .t-coral  { background: #FAECE7; color: #712B13; border: 0.5px solid #F5C4B3; }
+  .t-green  { background: #EAF3DE; color: #27500A; border: 0.5px solid #C0DD97; }
+  .t-gray   { background: #F1EFE8; color: #444441; border: 0.5px solid #D3D1C7; }
+  .t-red    { background: #FCEBEB; color: #791F1F; border: 0.5px solid #F7C1C1; }
+  .t-pink   { background: #FBEAF0; color: #72243E; border: 0.5px solid #F4C0D1; }
+
+  @media (prefers-color-scheme: dark) {
+    .t-blue   { background: #0C447C; color: #B5D4F4; border-color: #185FA5; }
+    .t-teal   { background: #085041; color: #9FE1CB; border-color: #0F6E56; }
+    .t-purple { background: #3C3489; color: #CECBF6; border-color: #534AB7; }
+    .t-amber  { background: #633806; color: #FAC775; border-color: #854F0B; }
+    .t-coral  { background: #712B13; color: #F5C4B3; border-color: #993C1D; }
+    .t-green  { background: #27500A; color: #C0DD97; border-color: #3B6D11; }
+    .t-gray   { background: #444441; color: #D3D1C7; border-color: #5F5E5A; }
+    .t-red    { background: #791F1F; color: #F7C1C1; border-color: #A32D2D; }
+    .t-pink   { background: #72243E; color: #F4C0D1; border-color: #993556; }
+  }
+
+  .layer-header { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .07em; color: var(--color-text-tertiary); padding: 4px 0 4px 2px; }
+  .arrow-row { text-align: center; font-size: 14px; color: var(--color-text-tertiary); padding: 2px 0; }
+
+  /* Detail panel */
+  .detail { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: 10px; padding: 16px; margin-top: 16px; min-height: 80px; }
+  .detail h4 { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .detail ul { font-size: 12px; color: var(--color-text-secondary); line-height: 1.8; padding-left: 14px; }
+  .detail-placeholder { font-size: 12px; color: var(--color-text-tertiary); font-style: italic; }
+
+  /* Cards */
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 10px; padding: 14px; }
+  .card h4 { font-size: 12px; font-weight: 500; margin-bottom: 6px; }
+  .card ul { font-size: 11px; color: var(--color-text-secondary); line-height: 1.8; padding-left: 12px; }
+  .card .badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 500; margin-bottom: 6px; }
+  .b-blue   { background: #E6F1FB; color: #185FA5; }
+  .b-red    { background: #FCEBEB; color: #A32D2D; }
+  .b-green  { background: #EAF3DE; color: #3B6D11; }
+  .b-amber  { background: #FAEEDA; color: #854F0B; }
+  .b-purple { background: #EEEDFE; color: #534AB7; }
+  .b-teal   { background: #E1F5EE; color: #0F6E56; }
+  @media (prefers-color-scheme: dark) {
+    .b-blue   { background: #0C447C; color: #B5D4F4; }
+    .b-red    { background: #791F1F; color: #F7C1C1; }
+    .b-green  { background: #27500A; color: #C0DD97; }
+    .b-amber  { background: #633806; color: #FAC775; }
+    .b-purple { background: #3C3489; color: #CECBF6; }
+    .b-teal   { background: #085041; color: #9FE1CB; }
+  }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before { content:''; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background: var(--color-border-secondary); }
+  .phase { position: relative; margin-bottom: 18px; }
+  .phase::before { content:''; position:absolute; left:-17px; top:4px; width:8px; height:8px; border-radius:50%; background: var(--color-border-primary); }
+  .phase.done::before { background: #1D9E75; }
+  .phase.active::before { background: #378ADD; }
+  .phase h4 { font-size: 12px; font-weight: 500; margin-bottom: 4px; }
+  .phase p  { font-size: 11px; margin-bottom: 0; }
+  .phase .week { font-size: 10px; color: var(--color-text-tertiary); font-weight: 500; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+
+  /* Metrics */
+  .metric-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+  .metric { background: var(--color-background-secondary); border-radius: 8px; padding: 10px 12px; }
+  .metric .val { font-size: 20px; font-weight: 500; line-height: 1.2; }
+  .metric .lbl { font-size: 10px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: .05em; margin-top: 2px; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  th { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-tertiary); padding: 6px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); text-align: left; }
+  td { padding: 7px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* Guardrail chips */
+  .chip-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chip { font-size: 11px; padding: 4px 10px; border-radius: 12px; border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <button class="nav-btn active" data-tab="arch">Architecture</button>
+  <button class="nav-btn" data-tab="ingestion">Doc Ingestion</button>
+  <button class="nav-btn" data-tab="vector">Vector DB</button>
+  <button class="nav-btn" data-tab="security">Security</button>
+  <button class="nav-btn" data-tab="guardrails">Guardrails</button>
+  <button class="nav-btn" data-tab="governance">Governance</button>
+  <button class="nav-btn" data-tab="observability">Observability</button>
+  <button class="nav-btn" data-tab="scalability">Scale & Perf</button>
+  <button class="nav-btn" data-tab="roadmap">Roadmap</button>
+</nav>
+
+<!-- ARCHITECTURE -->
+<div class="section active" id="tab-arch">
+  <h2>Enterprise RAG Platform — Azure Reference Architecture</h2>
+  <p>End-to-end document intelligence platform on Azure. Click any component to see details.</p>
+
+  <div class="arch-grid">
+    <div class="layer-header">Data Sources</div>
+    <div class="arch-layer arch-layer-5">
+      <div class="tile t-gray" onclick="showDetail('SharePoint / OneDrive','Azure AD-integrated document libraries. Delta sync via MS Graph API every 5 min.','Connector: MS Graph API','Auth: OAuth2 / Managed Identity','Schedule: Delta sync 5-min intervals','Volume: Up to 10M docs')">
+        <div class="tile-label">SharePoint / OneDrive</div><div class="tile-sub">MS Graph API</div></div>
+      <div class="tile t-gray" onclick="showDetail('Blob Storage / ADLS','Raw file landing zone. Azure Data Lake Gen2 for structured partitioning.','Partitioning: year/month/day/hour','Format: Any (PDF, DOCX, XLSX...)','Lifecycle: Hot → Cool → Archive','SLA: 99.9% availability')">
+        <div class="tile-label">Blob / ADLS Gen2</div><div class="tile-sub">Raw file landing</div></div>
+      <div class="tile t-gray" onclick="showDetail('APIs & Webhooks','Real-time push ingestion from external systems via APIM gateway. Event-driven.','Protocol: HTTPS REST / Webhook','Auth: API Key + JWT','Rate limiting: APIM policies','DLQ: Service Bus dead-letter')">
+        <div class="tile-label">APIs & Webhooks</div><div class="tile-sub">Real-time push</div></div>
+      <div class="tile t-gray" onclick="showDetail('Databases (SQL/NoSQL)','Structured data extraction from Azure SQL, Cosmos DB, or on-prem via Data Factory.','Connector: ADF Copy Activity','CDC: Change capture on SQL','Format: JSON normalization','Incremental: Watermark-based')">
+        <div class="tile-label">SQL / Cosmos DB</div><div class="tile-sub">Structured data</div></div>
+      <div class="tile t-gray" onclick="showDetail('Email / Teams','Ingestion from M365 mailboxes and Teams channels using Compliance APIs.','API: M365 Compliance API','Retention: per DLP policy','PII: Auto-redact before index','Consent: User opt-in required')">
+        <div class="tile-label">Email / Teams</div><div class="tile-sub">M365 Compliance API</div></div>
+    </div>
+
+    <div class="arrow-row">↓</div>
+
+    <div class="layer-header">Ingestion & Processing Layer</div>
+    <div class="arch-layer arch-layer-4">
+      <div class="tile t-blue" onclick="showDetail('Azure Event Hubs / Service Bus','Event streaming backbone. Partitioned ingestion for high-throughput document events.','Throughput: 40 MB/s per partition','Partitions: 32 (scalable to 200)','Retention: 7 days','Protocol: AMQP / Kafka compat')">
+        <div class="tile-label">Event Hubs</div><div class="tile-sub">Streaming backbone</div></div>
+      <div class="tile t-blue" onclick="showDetail('Azure Data Factory / Synapse Pipelines','Orchestration of batch and micro-batch ingestion workflows with retry logic.','Triggers: Schedule + Event','Monitoring: ADF Monitor','Error handling: Retry 3x + DLQ','IR: Azure + Self-hosted')">
+        <div class="tile-label">ADF / Synapse</div><div class="tile-sub">Orchestration</div></div>
+      <div class="tile t-blue" onclick="showDetail('Azure AI Document Intelligence','Intelligent OCR, form extraction, layout analysis. Layout + Read models.','Models: Layout, Read, Custom','Accuracy: 95%+ on structured','Languages: 100+','Output: JSON with confidence scores')">
+        <div class="tile-label">AI Doc Intelligence</div><div class="tile-sub">OCR + extraction</div></div>
+      <div class="tile t-blue" onclick="showDetail('Azure Functions / Container Apps','Stateless processing workers for chunking, enrichment, and metadata extraction.','Runtime: Python 3.11 / .NET 8','Scale: 0 to 200 instances','Trigger: Service Bus / Blob','Timeout: 10 min max')">
+        <div class="tile-label">Functions / Container Apps</div><div class="tile-sub">Processing workers</div></div>
+    </div>
+
+    <div class="arrow-row">↓</div>
+
+    <div class="layer-header">Enrichment & Embedding Layer</div>
+    <div class="arch-layer arch-layer-4">
+      <div class="tile t-purple" onclick="showDetail('Text Chunking Service','Semantic chunking with overlap. Respects document structure (headings, tables, lists).','Strategy: Semantic + fixed 512 tokens','Overlap: 10% (51 tokens)','Hierarchy: Parent-child chunks','Metadata: Source, page, section')">
+        <div class="tile-label">Text Chunking</div><div class="tile-sub">Semantic splitting</div></div>
+      <div class="tile t-purple" onclick="showDetail('Azure OpenAI Embeddings','text-embedding-3-large for dense vectors. ada-002 as fallback for cost optimization.','Model: text-embedding-3-large','Dimensions: 3072','Batch size: 2048 tokens','Throughput: 1M tokens/min TPM')">
+        <div class="tile-label">Azure OpenAI Embeddings</div><div class="tile-sub">text-embedding-3-large</div></div>
+      <div class="tile t-purple" onclick="showDetail('Metadata Enrichment','Entity extraction, classification, PII detection, and taxonomy tagging via AI.','NER: Azure Language Service','PII: Presidio + custom rules','Classification: Custom classifier','Taxonomy: Configurable ontology')">
+        <div class="tile-label">Metadata Enrichment</div><div class="tile-sub">NER + PII + taxonomy</div></div>
+      <div class="tile t-purple" onclick="showDetail('Content Safety Filter','Pre-index content screening for harmful, sensitive, or policy-violating material.','Provider: Azure Content Safety','Categories: Hate, self-harm, violence','Threshold: Configurable per tenant','Action: Block / flag / quarantine')">
+        <div class="tile-label">Content Safety</div><div class="tile-sub">Pre-index screening</div></div>
+    </div>
+
+    <div class="arrow-row">↓</div>
+
+    <div class="layer-header">Storage Layer</div>
+    <div class="arch-layer arch-layer-3">
+      <div class="tile t-teal" onclick="showDetail('Azure AI Search (Vector DB)','Hybrid search engine. Combines dense vector, BM25 keyword, and semantic re-ranking.','Index: HNSW (ef=200, m=4)','Hybrid: RRF fusion scoring','Semantic: Cross-encoder rerank','Scale: Up to 6B vectors')">
+        <div class="tile-label">Azure AI Search</div><div class="tile-sub">HNSW + hybrid search</div></div>
+      <div class="tile t-teal" onclick="showDetail('Azure Cosmos DB (Metadata)','Document metadata store. Partition key on tenantId+docType for even distribution.','API: NoSQL (formerly SQL)','Partition key: tenantId+docType','RU provisioning: Autoscale','Consistency: Session (default)')">
+        <div class="tile-label">Cosmos DB</div><div class="tile-sub">Metadata + lineage</div></div>
+      <div class="tile t-teal" onclick="showDetail('Azure Redis Cache','Hot cache for frequent queries, session state, and embedding cache (TTL-based).','Tier: Enterprise E10+','TTL: 1h (embeddings), 5m (queries)','Eviction: allkeys-lru','HA: Active geo-replication')">
+        <div class="tile-label">Redis Cache</div><div class="tile-sub">Query + embedding cache</div></div>
+    </div>
+
+    <div class="arrow-row">↓</div>
+
+    <div class="layer-header">AI / Retrieval Layer</div>
+    <div class="arch-layer arch-layer-4">
+      <div class="tile t-amber" onclick="showDetail('Azure OpenAI (GPT-4o)','LLM for RAG generation, summarization, and rewriting. PTU deployment for SLA.','Model: GPT-4o (PTU)','Context: 128K tokens','Fallback: GPT-4 Turbo','Latency SLA: p95 < 3s')">
+        <div class="tile-label">Azure OpenAI GPT-4o</div><div class="tile-sub">PTU deployment</div></div>
+      <div class="tile t-amber" onclick="showDetail('Retrieval Orchestrator (Semantic Kernel)','Coordinates query expansion, retrieval, re-ranking, and generation pipeline.','Framework: Semantic Kernel v1','Query expansion: HyDE + multi-query','Re-rank: Cohere Rerank / cross-enc','Context assembly: MaxMarginal')">
+        <div class="tile-label">Semantic Kernel</div><div class="tile-sub">Retrieval orchestrator</div></div>
+      <div class="tile t-amber" onclick="showDetail('Prompt Management','Versioned prompt templates with A/B testing, rollback, and tenant-level overrides.','Storage: Azure App Config','Versioning: Semantic versioning','A/B: Feature flags via App Config','Audit: All prompt versions logged')">
+        <div class="tile-label">Prompt Management</div><div class="tile-sub">Versioned templates</div></div>
+      <div class="tile t-amber" onclick="showDetail('Response Grounding & Citations','Ensures every response is grounded in retrieved sources with verifiable citations.','Method: Source attribution','Hallucination detect: Faithfulness score','Citation format: Inline + footnote','Threshold: Faithfulness ≥ 0.85')">
+        <div class="tile-label">Grounding & Citations</div><div class="tile-sub">Source attribution</div></div>
+    </div>
+
+    <div class="arrow-row">↓</div>
+
+    <div class="layer-header">API & Application Layer</div>
+    <div class="arch-layer arch-layer-4">
+      <div class="tile t-coral" onclick="showDetail('Azure API Management','Unified API gateway. Rate limiting, auth, versioning, and developer portal.','Tier: Premium (multi-region)','Rate limit: Per-user + per-tenant','Auth: Azure AD B2C / AAD','Quota: 10K req/min default')">
+        <div class="tile-label">API Management</div><div class="tile-sub">Gateway + rate limiting</div></div>
+      <div class="tile t-coral" onclick="showDetail('Chat / Copilot Apps','Teams Copilot, web chat, and mobile apps consuming the RAG API.','Channels: Teams, Web, Mobile','Auth: SSO via Azure AD','SDK: Bot Framework / React','Real-time: SignalR streaming')">
+        <div class="tile-label">Chat / Copilot Apps</div><div class="tile-sub">Teams + Web + Mobile</div></div>
+      <div class="tile t-coral" onclick="showDetail('Admin Portal','Management UI for index management, pipeline monitoring, user admin, and config.','Stack: React + Azure Static Web Apps','Auth: Azure AD RBAC','Features: Index mgmt, pipeline view','Alerts: Azure Monitor integration')">
+        <div class="tile-label">Admin Portal</div><div class="tile-sub">Index + pipeline mgmt</div></div>
+      <div class="tile t-coral" onclick="showDetail('Developer API','REST + streaming API for third-party integrations. OpenAPI 3.1 spec published.','Spec: OpenAPI 3.1','SDKs: Python, TypeScript, .NET','Streaming: SSE / WebSocket','Sandbox: Dev tier with mock data')">
+        <div class="tile-label">Developer API</div><div class="tile-sub">REST + streaming</div></div>
+    </div>
+
+    <div class="arrow-row">↓</div>
+
+    <div class="layer-header">Cross-Cutting Concerns</div>
+    <div class="arch-layer arch-layer-5">
+      <div class="tile t-red" onclick="showDetail('Microsoft Entra ID','Identity plane. RBAC, conditional access, managed identities for service auth.','MFA: Required for all users','Managed ID: All service-to-service','RBAC: 6 custom roles','CA: Compliant device + location')">
+        <div class="tile-label">Entra ID / AAD</div><div class="tile-sub">Identity + RBAC</div></div>
+      <div class="tile t-red" onclick="showDetail('Azure Key Vault','Centralised secrets, certificates, and encryption key management with HSM.','Keys: RSA 4096 / EC P-384','Rotation: Auto 90-day','Purge protection: Enabled','BYOK: HSM-protected keys')">
+        <div class="tile-label">Key Vault</div><div class="tile-sub">Secrets + HSM keys</div></div>
+      <div class="tile t-red" onclick="showDetail('Microsoft Defender for Cloud','Posture management, threat detection, and vulnerability assessment across all services.','CSPM: Defender CSPM','Threat: Defender for AI (preview)','Score: Secure score tracking','SIEM: Sentinel integration')">
+        <div class="tile-label">Defender for Cloud</div><div class="tile-sub">CSPM + threat detect</div></div>
+      <div class="tile t-green" onclick="showDetail('Azure Monitor + Log Analytics','Unified observability. Metrics, logs, traces, and dashboards across all components.','Retention: 90 days hot / 2yr cold','Alerts: 50+ custom rules','Dashboards: Grafana + Azure','APM: App Insights + OpenTelemetry')">
+        <div class="tile-label">Monitor + Log Analytics</div><div class="tile-sub">Unified observability</div></div>
+      <div class="tile t-green" onclick="showDetail('Azure Policy + Purview','Data governance, compliance enforcement, and data cataloging with lineage.','Policies: 40+ built-in + custom','Purview: Data map + lineage','Compliance: GDPR, ISO 27001','Scan: Auto-classify sensitive data')">
+        <div class="tile-label">Policy + Purview</div><div class="tile-sub">Governance + lineage</div></div>
+    </div>
+  </div>
+
+  <div class="detail" id="detail-panel">
+    <p class="detail-placeholder">Click any component above to see configuration details.</p>
+  </div>
+</div>
+
+<!-- INGESTION -->
+<div class="section" id="tab-ingestion">
+  <h2>Document Ingestion Pipeline</h2>
+  <p>Multi-source, multi-format ingestion with intelligent extraction and normalization.</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge b-blue">Connectors</div>
+      <h4>Supported Sources</h4>
+      <ul>
+        <li>SharePoint Online (MS Graph delta sync)</li>
+        <li>Azure Blob / ADLS Gen2 (event-driven)</li>
+        <li>OneDrive for Business</li>
+        <li>Azure SQL / Cosmos DB (CDC)</li>
+        <li>M365 Exchange / Teams (Compliance API)</li>
+        <li>REST API / Webhook push</li>
+        <li>SFTP / FTP (via ADF)</li>
+        <li>SAP / Salesforce (via Logic Apps)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-green">Formats</div>
+      <h4>Supported File Types</h4>
+      <ul>
+        <li>PDF (native text + OCR scanned)</li>
+        <li>DOCX / DOC / RTF</li>
+        <li>XLSX / CSV / TSV</li>
+        <li>PPTX / PPT</li>
+        <li>HTML / Markdown / Plain text</li>
+        <li>Images: PNG, JPEG, TIFF (OCR)</li>
+        <li>Email: MSG / EML</li>
+        <li>JSON / XML (structured)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-purple">Processing</div>
+      <h4>Chunking Strategy</h4>
+      <ul>
+        <li>Semantic chunking (sentence boundaries)</li>
+        <li>Max chunk: 512 tokens, overlap: 51 tokens</li>
+        <li>Parent-child hierarchy preserved</li>
+        <li>Table/list structure-aware splitting</li>
+        <li>Section/heading metadata retained</li>
+        <li>Multi-modal: separate text + image chunks</li>
+        <li>Small-to-big retrieval supported</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-amber">Enrichment</div>
+      <h4>Metadata Enrichment</h4>
+      <ul>
+        <li>NER: People, orgs, locations, dates</li>
+        <li>PII detection + selective redaction</li>
+        <li>Sentiment + toxicity scoring</li>
+        <li>Document classification (custom model)</li>
+        <li>Language detection + translation flag</li>
+        <li>Keyword extraction (TF-IDF + KeyBERT)</li>
+        <li>Summarization (per chunk + per doc)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-teal">Quality</div>
+      <h4>Data Quality Gates</h4>
+      <ul>
+        <li>Min content length: 50 characters</li>
+        <li>OCR confidence threshold: ≥ 0.7</li>
+        <li>Duplicate detection (MinHash LSH)</li>
+        <li>Near-duplicate suppression (Jaccard ≥ 0.9)</li>
+        <li>Virus scan: Defender for Storage</li>
+        <li>Schema validation before indexing</li>
+        <li>Dead-letter queue for failed docs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-red">SLA</div>
+      <h4>Performance Targets</h4>
+      <ul>
+        <li>Ingestion latency: &lt; 30s per document</li>
+        <li>Batch throughput: 50K docs/hour</li>
+        <li>Embedding throughput: 5M tokens/min</li>
+        <li>Index update: near-real-time (&lt; 60s)</li>
+        <li>Re-indexing: full rebuild &lt; 4 hours</li>
+        <li>Availability: 99.9% ingestion pipeline</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- VECTOR DB -->
+<div class="section" id="tab-vector">
+  <h2>Vector Database Strategy</h2>
+  <p>Hybrid search combining dense vectors, BM25 keyword, and semantic re-ranking on Azure AI Search.</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge b-blue">Index Design</div>
+      <h4>Azure AI Search Schema</h4>
+      <ul>
+        <li>Field: id (Edm.String, key)</li>
+        <li>Field: content (Edm.String, searchable)</li>
+        <li>Field: contentVector (Collection Float32, 3072d)</li>
+        <li>Field: title, source, tenantId, docType</li>
+        <li>Field: createdAt, updatedAt, page, section</li>
+        <li>Field: piiRedacted (Edm.Boolean)</li>
+        <li>Field: classificationLabel, confidenceScore</li>
+        <li>HNSW: efConstruction=400, m=4</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-green">Retrieval</div>
+      <h4>Hybrid Search Pipeline</h4>
+      <ul>
+        <li>Dense vector: cosine similarity (HNSW)</li>
+        <li>Keyword: BM25 full-text search</li>
+        <li>Fusion: Reciprocal Rank Fusion (k=60)</li>
+        <li>Semantic re-rank: cross-encoder (top 50)</li>
+        <li>Query expansion: HyDE hypothetical doc</li>
+        <li>Multi-query: 3 LLM-generated variants</li>
+        <li>Filters: tenantId, docType, date range</li>
+        <li>Top-K: default 10, max 50</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-purple">Embedding Model</div>
+      <h4>Embedding Configuration</h4>
+      <ul>
+        <li>Primary: text-embedding-3-large (3072d)</li>
+        <li>Compressed: text-embedding-3-small (1536d)</li>
+        <li>Batch size: 2048 tokens per request</li>
+        <li>TPM quota: 1M tokens/min (PTU)</li>
+        <li>Caching: Redis TTL 1h for identical inputs</li>
+        <li>Multi-lingual: native 100+ language support</li>
+        <li>Matryoshka: dimension reduction supported</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-amber">Multi-tenancy</div>
+      <h4>Tenant Isolation Strategy</h4>
+      <ul>
+        <li>Index-per-tenant (high isolation, &lt;100 tenants)</li>
+        <li>Filter-per-tenant (scale, 100+ tenants)</li>
+        <li>Hybrid: tiered by data sensitivity</li>
+        <li>RBAC: Row-level security via filter</li>
+        <li>Encryption: Per-tenant CMK in Key Vault</li>
+        <li>Quota: Per-tenant RU/search unit limits</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-teal">Performance</div>
+      <h4>Search Performance Targets</h4>
+      <ul>
+        <li>P50 query latency: &lt; 50ms (vector only)</li>
+        <li>P95 hybrid latency: &lt; 200ms</li>
+        <li>P99 with re-rank: &lt; 500ms</li>
+        <li>Throughput: 1000 QPS per search unit</li>
+        <li>Index size: up to 6B vectors per service</li>
+        <li>Replicas: 3 for HA + load balancing</li>
+        <li>Partitions: Scale horizontally as needed</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-red">Evaluation</div>
+      <h4>Retrieval Quality Metrics</h4>
+      <ul>
+        <li>NDCG@10: target ≥ 0.80</li>
+        <li>MRR@10: target ≥ 0.75</li>
+        <li>Recall@10: target ≥ 0.85</li>
+        <li>Precision@5: target ≥ 0.70</li>
+        <li>Faithfulness score: ≥ 0.85 (RAGAS)</li>
+        <li>Answer relevance: ≥ 0.80 (RAGAS)</li>
+        <li>Continuous eval: RAGAS + custom evals</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECURITY -->
+<div class="section" id="tab-security">
+  <h2>Security Architecture</h2>
+  <p>Zero-trust, defense-in-depth across identity, network, data, and AI layers.</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge b-red">Identity (Zero Trust)</div>
+      <h4>Authentication & Authorization</h4>
+      <ul>
+        <li>Entra ID (AAD) as identity provider</li>
+        <li>MFA enforced for all human identities</li>
+        <li>Managed Identities for all service auth</li>
+        <li>No service principals with passwords</li>
+        <li>Conditional Access: device compliance + location</li>
+        <li>PIM: JIT elevation for privileged roles</li>
+        <li>6 custom RBAC roles (Reader to Admin)</li>
+        <li>Token lifetime: 1h access, 8h refresh</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-red">Network</div>
+      <h4>Network Security</h4>
+      <ul>
+        <li>All services on private endpoints (no public IP)</li>
+        <li>Azure Private DNS zones for resolution</li>
+        <li>NSGs on all subnets (allow-list only)</li>
+        <li>Azure Firewall Premium (IDPS enabled)</li>
+        <li>DDoS Protection Standard on front-end</li>
+        <li>WAF on APIM (OWASP ruleset)</li>
+        <li>VNet peering to on-prem (ExpressRoute)</li>
+        <li>No internet egress except approved FQDNs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-amber">Data Protection</div>
+      <h4>Encryption & Data Security</h4>
+      <ul>
+        <li>Encryption at rest: AES-256 (CMK)</li>
+        <li>Encryption in transit: TLS 1.3 minimum</li>
+        <li>CMK per tenant in Azure Key Vault (HSM)</li>
+        <li>Key rotation: automatic 90-day cycle</li>
+        <li>Double encryption: infra + service layer</li>
+        <li>Purge protection on all Key Vaults</li>
+        <li>Soft delete: 90-day retention minimum</li>
+        <li>DLP policies: Purview auto-classify + block</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-purple">AI-Specific Security</div>
+      <h4>AI / LLM Security Controls</h4>
+      <ul>
+        <li>Prompt injection detection (custom classifier)</li>
+        <li>Jailbreak attempt logging + blocking</li>
+        <li>Response content filtering (Azure Content Safety)</li>
+        <li>Input/output token auditing</li>
+        <li>Model access via private endpoint only</li>
+        <li>No training data leakage (PTU isolation)</li>
+        <li>PII scrubbing before LLM context assembly</li>
+        <li>Grounding-only policy: no unsupported claims</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-blue">Compliance</div>
+      <h4>Regulatory Compliance</h4>
+      <ul>
+        <li>ISO 27001 / 27017 / 27018 aligned</li>
+        <li>SOC 2 Type II (via Azure attestation)</li>
+        <li>GDPR: Data residency, right-to-erasure</li>
+        <li>HIPAA: Optional BAA, PHI handling</li>
+        <li>FedRAMP: Azure Gov region option</li>
+        <li>NIST CSF: Full framework alignment</li>
+        <li>Microsoft SSPA (supply chain)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-teal">Incident Response</div>
+      <h4>Threat Detection & Response</h4>
+      <ul>
+        <li>Defender for Cloud (CSPM + CWP)</li>
+        <li>Microsoft Sentinel (SIEM/SOAR)</li>
+        <li>Diagnostic logs: all services → Sentinel</li>
+        <li>Anomaly detection: UEBA via Sentinel</li>
+        <li>IR playbooks: automated remediation</li>
+        <li>PEN test: annual + after major changes</li>
+        <li>MTTR target: &lt; 4 hours (critical)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- GUARDRAILS -->
+<div class="section" id="tab-guardrails">
+  <h2>AI Guardrails Framework</h2>
+  <p>Multi-layer controls ensuring safe, accurate, and policy-compliant AI outputs.</p>
+
+  <h3>Input Guardrails (Pre-LLM)</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge b-red">Prompt Safety</div>
+      <h4>Input Validation</h4>
+      <ul>
+        <li>Max input length: 8192 tokens</li>
+        <li>Prompt injection classifier (BERT-based)</li>
+        <li>Jailbreak pattern detection (rule + ML)</li>
+        <li>Profanity / hate speech filter</li>
+        <li>PII detection in user query (Presidio)</li>
+        <li>Disallowed topic classifier (configurable)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-amber">Context Assembly</div>
+      <h4>RAG Context Controls</h4>
+      <ul>
+        <li>Max context window: 16K tokens</li>
+        <li>Source access check (RBAC) per chunk</li>
+        <li>PII scrub from retrieved chunks</li>
+        <li>Classification-level enforcement</li>
+        <li>Confidence threshold: discard &lt; 0.5 score</li>
+        <li>Diversity: max 3 chunks per source doc</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:16px;">Output Guardrails (Post-LLM)</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge b-purple">Hallucination Detection</div>
+      <h4>Response Grounding</h4>
+      <ul>
+        <li>Faithfulness score via RAGAS ≥ 0.85</li>
+        <li>NLI entailment check vs. retrieved sources</li>
+        <li>Citation verification (every claim linked)</li>
+        <li>Out-of-context claim detection</li>
+        <li>Low-confidence flagging to end-user</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-red">Content Safety</div>
+      <h4>Output Filtering</h4>
+      <ul>
+        <li>Azure Content Safety API (all responses)</li>
+        <li>PII detection in output (Presidio)</li>
+        <li>Harmful content categories: 4 severity levels</div>
+        <li>Legal/compliance disclaimer injection</li>
+        <li>Confidential info watermark stripping</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-blue">Audit & Logging</div>
+      <h4>Full Audit Trail</h4>
+      <ul>
+        <li>Every query + response logged (Log Analytics)</li>
+        <li>Prompt + context stored (configurable retention)</li>
+        <li>Guardrail trigger events tracked</li>
+        <li>User identity tied to every interaction</li>
+        <li>Export for compliance review: GDPR-aware</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-green">Human Oversight</div>
+      <h4>Escalation & Review</h4>
+      <ul>
+        <li>Low-confidence → human review queue</li>
+        <li>Flagged responses → reviewer dashboard</li>
+        <li>Feedback loop: thumbs up/down → fine-tune data</li>
+        <li>Red-team testing: quarterly adversarial eval</li>
+        <li>Model card: documented limitations per use case</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:16px;">Configurable Guardrail Chips</h3>
+  <p>All guardrails are configurable per-tenant and per-use-case:</p>
+  <div class="chip-grid">
+    <span class="chip">Prompt injection detect</span>
+    <span class="chip">Jailbreak blocking</span>
+    <span class="chip">PII scrubbing</span>
+    <span class="chip">Toxicity filter</span>
+    <span class="chip">Hallucination score</span>
+    <span class="chip">Citation enforcement</span>
+    <span class="chip">Topic restrictions</span>
+    <span class="chip">Output length cap</span>
+    <span class="chip">Language enforcement</span>
+    <span class="chip">Confidentiality labels</span>
+    <span class="chip">Human escalation</span>
+    <span class="chip">Response watermarking</span>
+    <span class="chip">DLP policy check</span>
+    <span class="chip">Sensitive doc blocking</span>
+    <span class="chip">Audit log retention</span>
+  </div>
+</div>
+
+<!-- GOVERNANCE -->
+<div class="section" id="tab-governance">
+  <h2>Data Governance Framework</h2>
+  <p>End-to-end data lineage, classification, and lifecycle management via Microsoft Purview.</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge b-blue">Data Catalog</div>
+      <h4>Microsoft Purview — Data Map</h4>
+      <ul>
+        <li>Auto-discovery: all connected data sources</li>
+        <li>Automated classification (100+ classifiers)</li>
+        <li>Custom classifiers for domain data</li>
+        <li>Business glossary: 500+ terms</li>
+        <li>Lineage: source → chunk → vector → response</li>
+        <li>Sensitivity labels: Public / Internal / Confidential / Restricted</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-purple">Data Lifecycle</div>
+      <h4>Retention & Disposal</h4>
+      <ul>
+        <li>Retention policies per document class</li>
+        <li>Auto-expiry: vectors purged with source doc</li>
+        <li>Right-to-erasure: cascade delete pipeline</li>
+        <li>Legal hold: override retention for eDiscovery</li>
+        <li>Archive tier: docs &gt; 2 years old</li>
+        <li>Disposal: cryptographic erasure (CMK rotation)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-green">Access Control</div>
+      <h4>Data Access Governance</h4>
+      <ul>
+        <li>RBAC: 6 roles (Reader → Global Admin)</li>
+        <li>Attribute-based access (ABAC) on sensitivity</li>
+        <li>Data owner approval workflow (Purview)</li>
+        <li>Self-service access requests with approval</li>
+        <li>Access reviews: quarterly automated</li>
+        <li>Orphaned access detection + auto-revoke</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-amber">AI Governance</div>
+      <h4>Responsible AI Controls</h4>
+      <ul>
+        <li>Model inventory: all deployed models tracked</li>
+        <li>Bias evaluation: before production deployment</li>
+        <li>Model cards: documented per use case</li>
+        <li>Impact assessment: high-risk AI (EU AI Act)</li>
+        <li>Human oversight: mandatory for high-stakes</li>
+        <li>Version control: all prompt + model versions</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-teal">Compliance Reporting</div>
+      <h4>Audit & Reporting</h4>
+      <ul>
+        <li>Compliance Manager: continuous score tracking</li>
+        <li>Automated evidence collection</li>
+        <li>GDPR Article 30 Records of Processing</li>
+        <li>DPIA template library</li>
+        <li>Monthly compliance report to CISO</li>
+        <li>Regulator-ready export (PDF/Excel)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-red">Cost Governance</div>
+      <h4>FinOps Controls</h4>
+      <ul>
+        <li>Budget alerts: 80% / 100% thresholds</li>
+        <li>Per-tenant cost tagging (mandatory)</li>
+        <li>Reserved capacity: AI Search + OpenAI PTU</li>
+        <li>Cost anomaly detection (Azure Cost Mgmt)</li>
+        <li>Showback dashboards per BU</li>
+        <li>Rightsizing recommendations: monthly</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- OBSERVABILITY -->
+<div class="section" id="tab-observability">
+  <h2>Observability & Monitoring</h2>
+  <p>Full-stack telemetry with OpenTelemetry, Azure Monitor, and AI-specific metrics.</p>
+
+  <div class="metric-row">
+    <div class="metric"><div class="val" style="color:#185FA5">99.9%</div><div class="lbl">Availability SLA</div></div>
+    <div class="metric"><div class="val" style="color:#1D9E75">&lt;3s</div><div class="lbl">P95 E2E Latency</div></div>
+    <div class="metric"><div class="val" style="color:#854F0B">50K</div><div class="lbl">Docs/hr Ingestion</div></div>
+    <div class="metric"><div class="val" style="color:#534AB7">1000</div><div class="lbl">QPS Search</div></div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="badge b-blue">Traces</div>
+      <h4>Distributed Tracing</h4>
+      <ul>
+        <li>OpenTelemetry SDK across all services</li>
+        <li>Trace: query → retrieval → LLM → response</li>
+        <li>Correlation ID propagated end-to-end</li>
+        <li>App Insights: auto-trace for Azure services</li>
+        <li>Sampling: 100% errors, 10% success</li>
+        <li>Latency breakdown per pipeline stage</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-green">Metrics</div>
+      <h4>Key Metrics Tracked</h4>
+      <ul>
+        <li>Ingestion lag (Event Hubs consumer lag)</li>
+        <li>Embedding throughput (tokens/min)</li>
+        <li>Search latency (P50, P95, P99)</li>
+        <li>LLM tokens consumed + cost per query</li>
+        <li>Guardrail trigger rate per category</li>
+        <li>Retrieval relevance score (avg NDCG)</li>
+        <li>Error rate by pipeline stage</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-amber">Logs</div>
+      <h4>Log Strategy</h4>
+      <ul>
+        <li>Structured JSON logs → Log Analytics</li>
+        <li>Retention: 90 days hot / 2 years cold</li>
+        <li>Security logs → Microsoft Sentinel</li>
+        <li>AI interaction logs: prompt + response</li>
+        <li>All pipeline events with doc IDs</li>
+        <li>KQL dashboards for ops team</li>
+        <li>Log export: GDPR-aware PII masking</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-red">Alerts</div>
+      <h4>Alerting Rules</h4>
+      <ul>
+        <li>P95 latency &gt; 5s → PagerDuty (P1)</li>
+        <li>Error rate &gt; 1% → Slack (P2)</li>
+        <li>Ingestion lag &gt; 1000 msgs → Ops alert</li>
+        <li>Guardrail trigger spike &gt; 5x baseline</li>
+        <li>Cost budget 80% threshold</li>
+        <li>Security: Defender alert → Sentinel incident</li>
+        <li>Uptime &lt; 99.5% → escalate to VP Eng</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-purple">AI Quality</div>
+      <h4>RAG Quality Monitoring</h4>
+      <ul>
+        <li>Faithfulness score: tracked per query</li>
+        <li>Answer relevance: RAGAS continuous eval</li>
+        <li>Retrieval quality: NDCG@10 weekly report</li>
+        <li>Hallucination rate: flagged + reviewed</li>
+        <li>User feedback signal: thumbs + explicit rating</li>
+        <li>Drift detection: embedding quality over time</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-teal">Dashboards</div>
+      <h4>Observability Dashboards</h4>
+      <ul>
+        <li>Operations: Grafana + Azure Workbooks</li>
+        <li>AI Quality: custom RAGAS dashboard</li>
+        <li>Security: Sentinel SIEM workbook</li>
+        <li>FinOps: Azure Cost Management</li>
+        <li>Ingestion: pipeline health + throughput</li>
+        <li>SLA: real-time availability tracker</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SCALABILITY -->
+<div class="section" id="tab-scalability">
+  <h2>Scalability & Performance</h2>
+  <p>Auto-scaling architecture designed for 100M+ documents and 10K+ concurrent users.</p>
+
+  <table>
+    <tr>
+      <th>Component</th><th>Scaling Mechanism</th><th>Min</th><th>Max</th><th>Trigger</th>
+    </tr>
+    <tr><td>Event Hubs</td><td>Auto-inflate partitions</td><td>8</td><td>200</td><td>Throughput units &gt; 80%</td></tr>
+    <tr><td>Container Apps (workers)</td><td>KEDA + Service Bus scaler</td><td>2</td><td>200</td><td>Queue depth &gt; 100 msgs</td></tr>
+    <tr><td>Azure Functions</td><td>Consumption / Flex plan</td><td>0</td><td>∞</td><td>Event-driven</td></tr>
+    <tr><td>Azure AI Search</td><td>Manual replica + partition scale</td><td>3 replicas</td><td>12 replicas</td><td>QPS &gt; 800 / p95 &gt; 300ms</td></tr>
+    <tr><td>Azure OpenAI (PTU)</td><td>PTU + overflow PAYG</td><td>100 PTU</td><td>Burst PAYG</td><td>Token queue &gt; 500ms</td></tr>
+    <tr><td>Cosmos DB</td><td>Autoscale RU/s</td><td>1000 RU/s</td><td>100K RU/s</td><td>RU consumption &gt; 70%</td></tr>
+    <tr><td>Redis Cache</td><td>Geo-replication + cluster</td><td>E10</td><td>E100</td><td>Memory &gt; 75%</td></tr>
+    <tr><td>APIM</td><td>Premium multi-region</td><td>1 unit</td><td>10 units</td><td>Request rate &gt; 8K/min</td></tr>
+    <tr><td>ADF Integration Runtime</td><td>Managed scale-out</td><td>4 cores</td><td>256 cores</td><td>Parallel activities</td></tr>
+  </table>
+
+  <div style="margin-top:16px;" class="card-grid">
+    <div class="card">
+      <div class="badge b-blue">Multi-Region</div>
+      <h4>Geographic Distribution</h4>
+      <ul>
+        <li>Primary: East US 2 (main workload)</li>
+        <li>Secondary: West Europe (DR + EU data residency)</li>
+        <li>Traffic Manager: performance routing</li>
+        <li>AI Search: geo-replication for read replicas</li>
+        <li>Cosmos DB: multi-region writes</li>
+        <li>RTO: &lt; 1 hour | RPO: &lt; 15 minutes</li>
+        <li>Active-active for stateless services</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-green">Caching Strategy</div>
+      <h4>Multi-Layer Cache</h4>
+      <ul>
+        <li>L1: In-process cache (Semantic Kernel)</li>
+        <li>L2: Redis — embedding cache (TTL 1h)</li>
+        <li>L3: Redis — query result cache (TTL 5m)</li>
+        <li>L4: APIM response cache (configurable TTL)</li>
+        <li>Cache hit rate target: &gt; 40% for embeddings</li>
+        <li>Invalidation: doc update event triggers purge</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-amber">Performance Budgets</div>
+      <h4>E2E Latency Budget</h4>
+      <ul>
+        <li>Query parse + safety check: &lt; 50ms</li>
+        <li>Embedding generation (cached): &lt; 5ms</li>
+        <li>Embedding generation (cold): &lt; 100ms</li>
+        <li>Hybrid search + re-rank: &lt; 200ms</li>
+        <li>Context assembly: &lt; 50ms</li>
+        <li>LLM generation (streaming): &lt; 2.5s TTFT</li>
+        <li>Response grounding check: &lt; 100ms</li>
+        <li>Total P95: &lt; 3s end-to-end</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge b-purple">Capacity Planning</div>
+      <h4>Sizing for Scale</h4>
+      <ul>
+        <li>100M documents: ~40TB raw, ~2TB vectors</li>
+        <li>10K concurrent users: 500 QPS sustained</li>
+        <li>AI Search: 4 partitions × 6 replicas</li>
+        <li>OpenAI PTU: 300 PTU + PAYG overflow</li>
+        <li>Event Hubs: 40 throughput units</li>
+        <li>Cosmos DB: 50K RU/s autoscale</li>
+        <li>Monthly cost estimate: $35K–$60K USD</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ROADMAP -->
+<div class="section" id="tab-roadmap">
+  <h2>Implementation Roadmap</h2>
+  <p>Phased delivery over 6 months, from foundation to enterprise-grade production.</p>
+
+  <div class="timeline">
+    <div class="phase done">
+      <div class="week">Weeks 1–3 — Foundation</div>
+      <h4>Phase 0: Infrastructure & Identity</h4>
+      <p>Azure landing zone, VNet, private endpoints, Key Vault, Entra ID RBAC, Azure Policy baseline, tagging strategy, Terraform/Bicep IaC. All services deployed in private networking.</p>
+    </div>
+    <div class="phase active">
+      <div class="week">Weeks 4–8 — Core Pipeline</div>
+      <h4>Phase 1: Ingestion & Vectorization</h4>
+      <p>Event Hubs + ADF connectors for Blob and SharePoint. Azure AI Document Intelligence integration. Chunking service deployment. Embedding pipeline (Azure OpenAI). AI Search index creation. Basic hybrid search functional.</p>
+    </div>
+    <div class="phase">
+      <div class="week">Weeks 9–12 — RAG API</div>
+      <h4>Phase 2: Retrieval & Generation</h4>
+      <p>Semantic Kernel orchestrator. GPT-4o PTU deployment. Hybrid retrieval with re-ranking. Prompt management service. Response grounding + citations. APIM gateway. Initial guardrails (content safety + PII).</p>
+    </div>
+    <div class="phase">
+      <div class="week">Weeks 13–16 — Security & Governance</div>
+      <h4>Phase 3: Enterprise Hardening</h4>
+      <p>Full guardrails framework. Microsoft Purview onboarding + data classification. Sentinel SIEM integration. Compliance Manager configuration. Audit logging. PIM + conditional access. Penetration testing.</p>
+    </div>
+    <div class="phase">
+      <div class="week">Weeks 17–20 — Applications & Multi-tenancy</div>
+      <h4>Phase 4: Application Layer</h4>
+      <p>Teams Copilot app. Admin portal (React + Static Web Apps). Multi-tenant isolation (index-per-tenant for sensitive). Developer API with OpenAPI spec. SDK publishing (Python + TypeScript). User feedback loop.</p>
+    </div>
+    <div class="phase">
+      <div class="week">Weeks 21–24 — Optimise & Scale</div>
+      <h4>Phase 5: Production Excellence</h4>
+      <p>RAGAS continuous eval pipeline. Performance tuning (caching, PTU sizing). Multi-region DR setup. FinOps dashboards. Load testing (10K concurrent). SLA sign-off. Runbook and ops playbooks. Go-live.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;">
+    <h3>Key Decision Points</h3>
+    <table>
+      <tr><th>Decision</th><th>Recommendation</th><th>Alternative</th></tr>
+      <tr><td>Vector DB</td><td>Azure AI Search (native hybrid)</td><td>Pinecone / Qdrant if pure-vector needed</td></tr>
+      <tr><td>Tenant isolation</td><td>Index-per-tenant (&lt;100) / Filter (&gt;100)</td><td>Namespace separation in single index</td></tr>
+      <tr><td>Embedding model</td><td>text-embedding-3-large (quality)</td><td>text-embedding-3-small (cost)</td></tr>
+      <tr><td>LLM deployment</td><td>PTU for predictable SLA</td><td>PAYG for variable/dev workloads</td></tr>
+      <tr><td>Orchestration</td><td>Semantic Kernel (Microsoft-native)</td><td>LangChain / LlamaIndex</td></tr>
+      <tr><td>Monitoring</td><td>Azure Monitor + Grafana</td><td>Datadog / New Relic</td></tr>
+    </table>
+  </div>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.nav-btn');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  function showDetail(name, desc, ...bullets) {
+    const panel = document.getElementById('detail-panel');
+    panel.innerHTML = `<h4>${name}</h4><p style="font-size:12px;margin-bottom:8px;color:var(--color-text-secondary)">${desc}</p><ul>${bullets.map(b => `<li>${b}</li>`).join('')}</ul>`;
+  }
+</script>
+</body>
+</html>
