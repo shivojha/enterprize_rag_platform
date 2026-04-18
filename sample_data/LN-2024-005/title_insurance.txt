@@ -1,0 +1,86 @@
+TITLE INSURANCE COMMITMENT
+Loan ID: LN-2024-005
+Borrower: Michael Brown
+Property: 567 Birch Lane, Austin TX 78745
+Commitment Date: 2024-03-08
+Commitment Number: TI-2024-ATX-8821
+Title Company: Lone Star Title Insurance Co.
+Title Officer: Diana Reyes (TX License #T-12034)
+
+COMMITMENT TO ISSUE POLICY
+----------------------------
+Subject to the conditions and stipulations set forth herein, Lone Star Title Insurance Co.
+commits to issue the following policies upon settlement:
+
+OWNER'S POLICY
+  Coverage Amount:   $310,000 (full purchase price)
+  Policy Type: ALTA Homeowner's Policy (2021)
+  Premium: $1,395.00 (one-time, paid at closing)
+  Insured: Michael Brown
+
+LENDER'S POLICY (Loan Policy)
+  Coverage Amount:   $248,000 (loan amount)
+  Policy Type: ALTA Loan Policy (2021)
+  Premium: $485.00 (one-time, paid at closing)
+  Insured: ABC Mortgage Corp and its successors/assigns
+
+TITLE SEARCH SUMMARY
+---------------------
+Search Period: 40 years (1984 to present)
+Examiner: Robert Castillo, Title Examiner
+Search Completed: 2024-03-07
+
+CURRENT VESTING
+----------------
+Current Owner: Thomas & Patricia Walsh (sellers)
+How Held: Joint Tenancy with Right of Survivorship
+Deed Recorded: 2018-06-14, Travis County Clerk, Vol. 21043, Pg. 884
+
+LIENS AND ENCUMBRANCES FOUND
+------------------------------
+1. Existing Mortgage: Wells Fargo Bank, Recorded 2018-06-14
+   Original Amount: $230,000 | Estimated Payoff: $194,320
+   Status: TO BE RELEASED AT CLOSING — payoff demand ordered
+
+2. Travis County Ad Valorem Property Taxes
+   2023 Taxes: $4,872 (paid in full — receipt attached)
+   2024 Taxes: Prorated to closing date — estimated $1,218 due from seller
+
+3. HOA — Birch Lane Community Association
+   Annual Dues: $960/year ($80/month)
+   Current Status: Paid through 2024-03-31
+   Proration: $80.00 credit to buyer for April
+
+NO OTHER LIENS, JUDGMENTS, OR ENCUMBRANCES FOUND.
+
+EXCEPTIONS TO COVERAGE (Standard)
+------------------------------------
+The following are standard exceptions and will not be covered by title insurance:
+1. Rights of parties in possession not shown by public records
+2. Easements not shown by public records
+3. Survey matters (boundary lines, encroachments) — survey ordered, see below
+4. Mineral rights — Texas standard exception applies
+
+SURVEY
+-------
+Survey Ordered: 2024-03-06 from FastSurvey Austin
+Survey Received: 2024-03-09
+Findings: No encroachments. Property boundaries match deed description.
+           6-foot utility easement along rear property line (standard, no structures affected).
+
+REQUIREMENTS BEFORE POLICY ISSUANCE
+--------------------------------------
+Prior to closing, the following must be satisfied:
+  [ ] 1. Release/payoff of existing Wells Fargo mortgage — payoff letter received $194,320
+  [ ] 2. Payment of all outstanding 2024 prorated taxes
+  [ ] 3. Seller's deed (Warranty Deed) executed and notarized
+  [ ] 4. Settlement statement approved and signed by all parties
+  [ ] 5. Funds received and verified by escrow agent
+
+CLOSING AGENT
+--------------
+Escrow/Closing Agent: Lone Star Title Insurance Co. — Austin Branch
+Escrow Officer: Diana Reyes
+Closing Scheduled: 2024-03-20 at 10:00 AM CST
+Address: 400 Congress Ave, Suite 210, Austin TX 78701
+Wire Instructions: Provided separately via encrypted email to buyer's attorney

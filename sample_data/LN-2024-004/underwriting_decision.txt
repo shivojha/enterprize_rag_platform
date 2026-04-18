@@ -1,0 +1,74 @@
+UNDERWRITING DECISION — LOAN APPROVAL
+Loan ID: LN-2024-004
+Borrower: Sarah Chen
+Property: 892 Maple Drive, Palo Alto, CA 94301
+Loan Type: Conventional Jumbo
+Decision Date: 2024-03-05
+Underwriter: Patricia Wells, CUW (NMLS #204817)
+Lender: ABC Mortgage Corp
+
+DECISION: APPROVED
+
+LOAN TERMS APPROVED
+--------------------
+Loan Amount:              $1,400,000
+Purchase Price:           $2,100,000
+Down Payment:               $700,000  (33.3%)
+Loan-to-Value (LTV):            66.7%
+Loan Program:      Conventional Jumbo (non-conforming)
+Interest Rate:                   6.75%  (30-year fixed, rate locked 2024-03-05)
+Rate Lock Expiry:          2024-04-05
+Monthly P&I Payment:         $9,081.56
+Estimated Taxes/Insurance:   $2,208.33/month
+Estimated Total PITI:       $11,289.89/month
+PMI Required: No (LTV below 80%)
+
+BORROWER QUALIFICATION SUMMARY
+--------------------------------
+Borrower Name:         Sarah Chen
+Annual Income:         $310,000 (verified — Senior Software Engineer, Stripe Inc.)
+Monthly Gross Income:   $25,833
+Credit Score (Mid):         768  (Equifax: 772, Experian: 768, TransUnion: 761)
+Front-End DTI:              43.7%  (PITI / gross income)
+Back-End DTI:               46.2%  (all obligations / gross income)
+
+JUMBO GUIDELINE NOTE: Standard Jumbo DTI limit is 43%. Borrower's back-end DTI of 46.2% exceeds
+guideline. Approved as exception based on: (1) credit score 768, (2) 33.3% down payment,
+(3) 18 months PITI reserves verified, (4) 9-year tenure at Stripe, (5) strong compensating factors.
+
+COMPENSATING FACTORS
+---------------------
+1. Credit Score: 768 — well above 720 Jumbo threshold
+2. Down Payment: $700,000 (33.3%) — significantly reduces risk exposure
+3. Cash Reserves: $485,000 verified in brokerage and savings accounts = 42.9 months PITI
+4. Employment Stability: 9 years at Stripe, no gaps; RSU income excluded from qualifying
+5. Loan Purpose: Primary residence purchase — lower default risk than investment property
+
+CONDITIONS OF APPROVAL
+------------------------
+Prior to Closing (must be cleared):
+  [ ] 1. Final appraisal review sign-off by Chief Appraiser
+  [ ] 2. Title commitment — clear title, no liens
+  [ ] 3. Homeowner's insurance binder — minimum $2,100,000 dwelling coverage
+  [ ] 4. Verification of $700,000 down payment funds — source confirmed (stock sale + savings)
+  [ ] 5. Final pay stubs within 30 days of closing
+  [ ] 6. Signed rate lock agreement
+  [ ] 7. Property must pass final walk-through
+
+Prior to Funding:
+  [ ] 8. Settlement statement (CD) signed by borrower
+  [ ] 9. Funds wired to escrow
+
+NOTES TO PROCESSOR
+-------------------
+DTI exception approved at senior underwriter level. Exception documented per Fannie Mae
+guidelines for non-conforming Jumbo with strong compensating factors. File passed QC review
+on 2024-03-04 with no material deficiencies noted.
+
+EXPIRY
+-------
+This approval is valid for 60 days from decision date (expires 2024-05-05).
+If closing does not occur by 2024-05-05, re-underwriting required.
+
+Signed: Patricia Wells, CUW
+Date: 2024-03-05

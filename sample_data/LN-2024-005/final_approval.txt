@@ -1,0 +1,84 @@
+FINAL LOAN APPROVAL — CLEAR TO CLOSE
+Loan ID: LN-2024-005
+Borrower: Michael Brown
+Property: 567 Birch Lane, Austin TX 78745
+Loan Type: FHA Streamline Refinance
+CTC Date: 2024-03-15
+Underwriter: Kevin Oduya, DE Underwriter (FHA Direct Endorsement #D-88421)
+Lender: ABC Mortgage Corp (FHA Lender ID: 84921-0002)
+
+DECISION: CLEAR TO CLOSE (CTC)
+
+All prior conditions of approval have been satisfied. Loan is approved to fund.
+
+APPROVED LOAN TERMS
+--------------------
+Original Loan (being refinanced):
+  Lender: First National Bank
+  Original Amount: $265,000 (originated 2021-08-10)
+  Current Balance: $248,000
+  Current Rate: 7.25% (30-year fixed)
+
+New Refinance Loan:
+  New Loan Amount:           $248,000
+  Loan Program:        FHA Streamline Refinance (no appraisal required)
+  New Interest Rate:              5.875%  (30-year fixed)
+  Rate Lock Expiry:          2024-03-25
+  New Monthly P&I:            $1,468.22
+  Estimated MIP (Monthly):      $134.50
+  Estimated Taxes/Insurance:    $445.00
+  New Total PITI:             $2,047.72
+
+Net Tangible Benefit:
+  Old PITI:      $2,310.00
+  New PITI:      $2,047.72
+  Monthly Savings:  $262.28  (11.35% reduction)
+  FHA Requirement: Net tangible benefit must exceed 5% reduction — SATISFIED
+
+FHA STREAMLINE REQUIREMENTS — ALL MET
+----------------------------------------
+  [x] Existing loan is FHA-insured (FHA Case #: 491-8834521)
+  [x] Loan is current — no 30-day late payments in last 12 months
+  [x] Borrower has made minimum 6 payments on existing loan
+  [x] Net tangible benefit demonstrated (11.35% payment reduction)
+  [x] No cash out (principal balance not increased)
+  [x] New loan does not exceed original principal balance
+  [x] MIP upfront paid (1.75% = $4,340, financed into loan)
+  [x] New annual MIP: 0.55% ($134.50/month — reduced from 0.85%)
+
+CONDITIONS CLEARED
+-------------------
+All conditions from initial approval (dated 2024-02-20) have been cleared:
+  [x] 1. 12-month mortgage payment history — no lates confirmed (2024-03-10)
+  [x] 2. Current FHA case number transferred — confirmed (2024-03-12)
+  [x] 3. Homeowner's insurance renewal binder — received (2024-03-11)
+  [x] 4. Title commitment — clear title confirmed (2024-03-09)
+  [x] 5. Final pay stubs dated within 30 days — received (2024-03-14)
+  [x] 6. HOA dues current — confirmed per title commitment
+
+FUNDING AUTHORIZATION
+----------------------
+Funding Amount:          $248,000.00
+Upfront MIP (financed):    $4,340.00
+Total Loan Disbursement: $252,340.00
+
+Disbursement Instructions:
+  Payoff — First National Bank:   $248,000.00
+  Closing Costs (borrower paid):    $3,200.00
+  Prepaid Items:                    $1,140.00
+  Net to Borrower:                      $0.00  (no cash out — streamline)
+
+CLOSING DETAILS
+----------------
+Scheduled Closing:   2024-03-20 at 10:00 AM CST
+Location: Lone Star Title Insurance Co., 400 Congress Ave, Suite 210, Austin TX 78701
+Right of Rescission: 3 business days (expires 2024-03-25 at midnight)
+First Payment Due:   2024-05-01
+
+Funding will be released after:
+  1. Right of rescission period expires without cancellation
+  2. Title company confirms disbursement
+  3. Recorded deed of trust received by lender
+
+Signed: Kevin Oduya, DE Underwriter
+Date: 2024-03-15

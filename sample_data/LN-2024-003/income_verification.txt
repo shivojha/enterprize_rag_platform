@@ -1,0 +1,61 @@
+INCOME VERIFICATION DOCUMENT
+Loan ID: LN-2024-003
+Borrower: Robert Johnson
+Employer: United States Department of Defense (DoD)
+Verification Date: 2024-01-18
+
+EMPLOYMENT DETAILS
+------------------
+Employment Status: Active Duty Military — Staff Sergeant (E-6)
+Branch: United States Army
+Years of Service: 11 years
+Current Duty Station: Fort Bragg, NC
+Estimated Separation Date: 2027-06-30 (contract renewal pending)
+
+INCOME BREAKDOWN
+----------------
+Base Pay (Monthly):                 $4,387.00
+Basic Allowance for Housing (BAH):  $1,842.00
+Basic Allowance for Subsistence:      $406.00
+Special Pay / Combat Pay:             $225.00
+Total Monthly Gross Income:         $6,860.00
+Annual Gross Income:               $82,320.00
+
+VERIFICATION SOURCE
+-------------------
+Verified by: LES (Leave and Earnings Statement) — January 2024
+Document Reference: LES-2024-01-RJ
+Verification Method: Direct employer contact via Defense Finance and Accounting Service (DFAS)
+Verified By: Sarah Monroe, Loan Processor, ABC Mortgage Corp
+
+VA LOAN ELIGIBILITY NOTE
+-------------------------
+Borrower has provided Certificate of Eligibility (COE) — Ref: COE-2024-RJ-4421
+Entitlement Status: Full entitlement available
+Remaining Entitlement: $181,550 (full)
+Funding Fee: 2.15% (first use, no down payment)
+Funding Fee Waiver: Not applicable (no service-connected disability rating on file)
+
+DEBT-TO-INCOME ANALYSIS
+------------------------
+Total Monthly Gross Income:   $6,860.00
+Proposed PITI Payment:        $1,645.00
+Existing Monthly Debts:         $612.00
+  - Auto loan:   $389/month (14 months remaining)
+  - Credit card: $223/month minimum
+Total Monthly Obligations:    $2,257.00
+Front-End DTI Ratio:          23.98%  (PITI / gross income)
+Back-End DTI Ratio:           32.90%  (all obligations / gross income)
+
+VA GUIDELINE: Back-end DTI above 41% triggers additional scrutiny. Borrower at 32.90% — within acceptable range.
+
+RESIDUAL INCOME CHECK
+----------------------
+Household Size: 3 (borrower + spouse + 1 dependent)
+VA Residual Income Requirement (Northeast region): $1,003/month
+Calculated Residual Income: $2,184/month
+Result: PASS — exceeds VA requirement by $1,181/month
+
+UNDERWRITER NOTE
+----------------
+Income is stable, verified through federal payroll system. BAH and BAS are non-taxable but counted for qualifying per VA guidelines. Auto loan scheduled to pay off within 14 months; residual income strong. Recommend approval pending satisfactory appraisal and title search.

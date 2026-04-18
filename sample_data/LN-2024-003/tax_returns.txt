@@ -1,0 +1,63 @@
+TAX RETURN SUMMARY — UNDERWRITING REVIEW
+Loan ID: LN-2024-003
+Borrower: Robert Johnson
+Prepared For: ABC Mortgage Corp — Underwriting Department
+Review Date: 2024-01-20
+
+RETURNS ON FILE
+---------------
+Tax Year 2022 — IRS Form 1040 (Filed: 2023-04-12)
+Tax Year 2023 — IRS Form 1040 (Filed: 2024-01-15, early filing)
+
+IRS 4506-C TRANSCRIPT VERIFICATION
+------------------------------------
+Transcript Request Date: 2024-01-17
+IRS Transcript Received: 2024-01-19
+Match to Borrower-Provided Returns: CONFIRMED — no discrepancies
+
+TAX YEAR 2022 SUMMARY
+----------------------
+Filing Status: Married Filing Jointly
+Spouse: Angela Johnson
+W-2 Income (Borrower — DoD):          $78,440.00
+W-2 Income (Spouse — Part-time RN):   $24,600.00
+Total Adjusted Gross Income (AGI):    $103,040.00
+Federal Tax Paid:                      $9,876.00
+Effective Tax Rate:                        9.58%
+Itemized Deductions Claimed: No (standard deduction)
+
+TAX YEAR 2023 SUMMARY
+----------------------
+Filing Status: Married Filing Jointly
+W-2 Income (Borrower — DoD):          $82,320.00
+W-2 Income (Spouse — Part-time RN):   $26,400.00
+Side Income (Spouse — Etsy store):     $3,200.00
+Total Adjusted Gross Income (AGI):    $111,920.00
+Federal Tax Paid:                      $11,204.00
+Effective Tax Rate:                        10.01%
+Schedule C (Spouse small business): Gross $3,200, Net $2,750 after expenses
+
+TWO-YEAR INCOME AVERAGE (Primary Borrower Only)
+-------------------------------------------------
+2022 Base Income:   $78,440
+2023 Base Income:   $82,320
+2-Year Average:     $80,380 per year / $6,698 per month
+
+UNDERWRITER NOTES
+-----------------
+- Income trend is positive year-over-year (+4.9%); no declining income concern
+- Spouse's part-time RN income not used for qualifying (less than 2-year history at same employer)
+- Spouse's Etsy income not used for qualifying (self-employment < 2 years)
+- Military BAH/BAS verified separately via LES; not reflected in W-2 (non-taxable)
+- No unreimbursed employee expenses (Form 2106) filed — no income reduction required
+- No rental income, capital gains, or unusual one-time items noted
+- No Schedule K-1 or partnership income
+
+QUALIFYING INCOME USED
+-----------------------
+Base Military Pay Only:    $82,320/year = $6,860/month (including BAH/BAS per LES)
+2-Year Average Crosscheck: Consistent. Using current year figure as primary qualifying income.
+
+CONCLUSION
+----------
+Tax returns verified and consistent with employment records. No red flags. Income is stable and meets VA loan program requirements.

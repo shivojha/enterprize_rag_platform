@@ -1,0 +1,72 @@
+RESIDENTIAL APPRAISAL REPORT
+Loan ID: LN-2024-004
+Borrower: Sarah Chen
+Property Address: 892 Maple Drive, Palo Alto, CA 94301
+Appraisal Date: 2024-02-28
+Report Date: 2024-03-02
+Appraisal Firm: Bay Area Valuation Group
+Appraiser: James Thornton, MAI, SRA (CA License #AR045821)
+
+PROPERTY DESCRIPTION
+--------------------
+Property Type: Single-Family Residence
+Year Built: 2009
+Living Area: 2,840 sq ft
+Lot Size: 6,200 sq ft
+Bedrooms: 4
+Bathrooms: 3.5
+Garage: 2-car attached
+Stories: 2
+Condition: Excellent — recently renovated kitchen and primary bath (2023)
+Zoning: R-1 (Single Family Residential)
+HOA: No
+
+APPRAISED VALUE
+---------------
+Appraised Value (As-Is):          $2,150,000
+Purchase Price (Contract):        $2,100,000
+Loan-to-Value (LTV):                   66.7%  ($1,400,000 loan / $2,100,000 purchase)
+
+CONVENTIONAL JUMBO GUIDELINE: LTV must not exceed 80% for Jumbo without PMI. At 66.7%, borrower is well within guidelines. No PMI required.
+
+SALES COMPARISON APPROACH
+--------------------------
+Three comparable sales within 0.5 miles, closed within 90 days:
+
+Comparable 1: 904 Maple Drive, Palo Alto
+  Sale Price: $2,080,000 | 2,760 sq ft | 4BR/3BA | Sold: 2024-01-15
+  Adjustments: +$25,000 (smaller lot), +$18,000 (older kitchen)
+  Adjusted Value: $2,123,000
+
+Comparable 2: 17 Birchwood Court, Palo Alto
+  Sale Price: $2,220,000 | 2,950 sq ft | 4BR/4BA | Sold: 2024-02-01
+  Adjustments: -$35,000 (larger living area), -$12,000 (extra bath)
+  Adjusted Value: $2,173,000
+
+Comparable 3: 441 Oak Street, Palo Alto
+  Sale Price: $1,975,000 | 2,650 sq ft | 3BR/3BA | Sold: 2023-12-20
+  Adjustments: +$65,000 (fewer bedrooms), +$22,000 (older renovation)
+  Adjusted Value: $2,062,000
+
+Reconciled Value (Weighted Average): $2,150,000
+
+MARKET CONDITIONS
+-----------------
+Market Trend: Stable to appreciating (Palo Alto residential — 3.2% YoY appreciation)
+Days on Market (Average): 18 days
+Supply: Low inventory — 0.8 months of supply
+Demand: Strong — proximity to tech corridor (Apple, Google campuses)
+Marketability: Excellent
+
+FLOOD / ENVIRONMENTAL
+----------------------
+FEMA Flood Zone: Zone X (minimal flood hazard) — no flood insurance required
+Environmental Concerns: None noted
+Earthquake Zone: Seismic Zone 4 — earthquake insurance recommended (disclosed to borrower)
+
+FINAL DETERMINATION
+--------------------
+The appraised value of $2,150,000 supports the purchase price of $2,100,000.
+The property is suitable collateral for the proposed Conventional Jumbo loan of $1,400,000.
+No repairs required as condition of appraisal.
+Appraisal complies with USPAP (Uniform Standards of Professional Appraisal Practice).
