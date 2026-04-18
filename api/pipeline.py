@@ -13,7 +13,7 @@ import time
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 LLM_MODEL = os.getenv("LLM_MODEL", "mistral")
 # Limit Ollama to half the CPU cores to prevent 100% saturation
-OLLAMA_NUM_THREAD = int(os.getenv("OLLAMA_NUM_THREAD", "4"))
+OLLAMA_NUM_THREAD = int(os.getenv("OLLAMA_NUM_THREAD", "10"))
 COLLECTION_NAME = "mortgage_docs"
 
 _lf_key = os.getenv("LANGFUSE_PUBLIC_KEY", "")
@@ -81,7 +81,7 @@ def retrieve_chunks(state: RAGState, qdrant: QdrantClient) -> RAGState:
             "score": round(r.score, 3),
         }
         for r in results
-        if r.score > 0.3  # skip low-relevance chunks
+        if r.score > 0.15  # POC threshold — short docs score lower than multi-chunk corpora
     ]
     return {**state, "chunks": chunks}
 

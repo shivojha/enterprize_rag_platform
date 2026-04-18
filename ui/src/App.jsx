@@ -22,7 +22,7 @@ const DEMO_LOANS = [
 const SUGGESTED_QUESTIONS = {
   application_submitted: [
     'Is this borrower eligible for an FHA loan?',
-    'What documents are still missing?',
+    'What is the borrower credit score and DTI ratio?',
     'What is the upfront MIP cost for this loan?',
   ],
   document_review: [
