@@ -10,10 +10,19 @@ import os
 import time
 
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
-LLM_MODEL = os.getenv("LLM_MODEL", "mistral")
-OLLAMA_NUM_THREAD = int(os.getenv("OLLAMA_NUM_THREAD", "4"))  # default matches docker-compose
-OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "90"))       # seconds; tune per machine
+LLM_MODEL = os.getenv("LLM_MODEL", "tinyllama")          # fast default for English
+LLM_MODEL_MULTILINGUAL = os.getenv("LLM_MODEL_MULTILINGUAL", "mistral")  # used for non-English
+OLLAMA_NUM_THREAD = int(os.getenv("OLLAMA_NUM_THREAD", "4"))
+OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "120"))
 COLLECTION_NAME = "mortgage_docs"
+
+# Basic ASCII range check — questions outside ASCII are non-English
+def _is_english(text: str) -> bool:
+    try:
+        text.encode("ascii")
+        return True
+    except UnicodeEncodeError:
+        return False
 
 _lf_key = os.getenv("LANGFUSE_PUBLIC_KEY", "")
 langfuse = Langfuse(
@@ -107,33 +116,48 @@ def no_context(state: RAGState) -> RAGState:
 
 
 def generate_answer(state: RAGState) -> RAGState:
-    # Respond in the same language as the question for multilingual support
-    prompt = (
-        "You are a mortgage underwriting assistant. "
-        "Answer in 2-3 sentences using only the context. Cite numbers where available. "
-        "Reply in the same language as the question.\n\n"
-        f"CONTEXT:\n{state['context']}\n\n"
-        f"QUESTION: {state['question']}\nANSWER:"
-    )
-
+    # Route to multilingual model when question contains non-ASCII characters
+    model = LLM_MODEL if _is_english(state["question"]) else LLM_MODEL_MULTILINGUAL
     response = httpx.post(
-        f"{OLLAMA_URL}/api/generate",
+        f"{OLLAMA_URL}/api/chat",
         json={
-            "model": LLM_MODEL,
-            "prompt": prompt,
+            "model": model,
             "stream": False,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a mortgage underwriting assistant. "
+                        "Answer using ONLY the provided context. "
+                        "Be concise (2-3 sentences). Cite numbers (DTI, credit score, LTV) when available. "
+                        "IMPORTANT: Reply in the same language the user used in their question."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"CONTEXT:\n{state['context']}\n\n"
+                        f"QUESTION: {state['question']}\n\n"
+                        + (
+                            "IMPORTANT: Your answer MUST be written in Hindi only."
+                            if not _is_english(state["question"])
+                            else ""
+                        )
+                    ),
+                },
+            ],
             "options": {
                 "num_thread": OLLAMA_NUM_THREAD,
-                "num_predict": 200,   # reduced from 300 — concise answers are faster
+                "num_predict": 200,
                 "temperature": 0.1,
-                "top_k": 10,          # narrow sampling = faster token selection
+                "top_k": 10,
                 "top_p": 0.9,
             },
         },
         timeout=OLLAMA_TIMEOUT,
     )
     response.raise_for_status()
-    answer = response.json()["response"].strip()
+    answer = response.json()["message"]["content"].strip()
     return {**state, "answer": answer}
 
 
