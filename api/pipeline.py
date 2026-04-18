@@ -5,15 +5,14 @@ from qdrant_client.models import Filter, FieldCondition, MatchValue
 from sentence_transformers import SentenceTransformer
 from langfuse import Langfuse
 from functools import lru_cache
-import hashlib
 import httpx
 import os
 import time
 
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 LLM_MODEL = os.getenv("LLM_MODEL", "mistral")
-# Limit Ollama to half the CPU cores to prevent 100% saturation
-OLLAMA_NUM_THREAD = int(os.getenv("OLLAMA_NUM_THREAD", "10"))
+OLLAMA_NUM_THREAD = int(os.getenv("OLLAMA_NUM_THREAD", "4"))  # default matches docker-compose
+OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "90"))       # seconds; tune per machine
 COLLECTION_NAME = "mortgage_docs"
 
 _lf_key = os.getenv("LANGFUSE_PUBLIC_KEY", "")
@@ -24,7 +23,6 @@ langfuse = Langfuse(
     enabled=bool(_lf_key),
 )
 
-# Cache up to 256 recent query embeddings — avoids re-encoding repeated questions
 @lru_cache(maxsize=256)
 def _cached_embed(question: str, embedder_id: str) -> tuple:
     return tuple(embedder_cache[embedder_id].encode(question).tolist())
@@ -69,7 +67,7 @@ def retrieve_chunks(state: RAGState, qdrant: QdrantClient) -> RAGState:
         collection_name=COLLECTION_NAME,
         query_vector=state["query_vector"],
         query_filter=search_filter,
-        limit=state.get("top_k", 3),  # reduced from 5 → 3 for shorter prompts
+        limit=state.get("top_k", 3),
         with_payload=True,
     )
 
@@ -90,8 +88,8 @@ def build_context(state: RAGState) -> RAGState:
     if not state["chunks"]:
         return {**state, "context": "", "sources": []}
 
-    # Truncate each chunk to 400 words to keep prompt small
-    def truncate(text: str, max_words: int = 400) -> str:
+    # 200 words per chunk keeps total prompt under ~700 tokens for faster CPU inference
+    def truncate(text: str, max_words: int = 200) -> str:
         words = text.split()
         return " ".join(words[:max_words]) + ("…" if len(words) > max_words else "")
 
@@ -109,14 +107,13 @@ def no_context(state: RAGState) -> RAGState:
 
 
 def generate_answer(state: RAGState) -> RAGState:
-    # Concise system prompt reduces token count → faster inference
-    prompt = f"""You are a mortgage underwriting assistant. Answer concisely using only the context below. Cite numbers (DTI, credit score, LTV) when available.
-
-CONTEXT:
-{state["context"]}
-
-QUESTION: {state["question"]}
-ANSWER:"""
+    # Shorter prompt = fewer tokens to process = faster CPU inference
+    prompt = (
+        "You are a mortgage underwriting assistant. "
+        "Answer in 2-3 sentences using only the context. Cite numbers where available.\n\n"
+        f"CONTEXT:\n{state['context']}\n\n"
+        f"QUESTION: {state['question']}\nANSWER:"
+    )
 
     response = httpx.post(
         f"{OLLAMA_URL}/api/generate",
@@ -125,12 +122,14 @@ ANSWER:"""
             "prompt": prompt,
             "stream": False,
             "options": {
-                "num_thread": OLLAMA_NUM_THREAD,  # cap CPU usage
-                "num_predict": 300,               # max tokens in response
-                "temperature": 0.1,               # low temp = faster, more deterministic
+                "num_thread": OLLAMA_NUM_THREAD,
+                "num_predict": 200,   # reduced from 300 — concise answers are faster
+                "temperature": 0.1,
+                "top_k": 10,          # narrow sampling = faster token selection
+                "top_p": 0.9,
             },
         },
-        timeout=120,
+        timeout=OLLAMA_TIMEOUT,
     )
     response.raise_for_status()
     answer = response.json()["response"].strip()
@@ -171,31 +170,64 @@ def run_rag_pipeline(graph, embedder_id: str, question: str, loan_id: Optional[s
         metadata={"loan_id": loan_id},
     )
 
-    t0 = time.perf_counter()
-    span_retrieve = trace.span(name="retrieve", input={"question": question})
+    # ── Retrieval span ──
+    t_retrieve = time.perf_counter()
+    span_retrieve = trace.span(name="retrieve", input={"question": question, "loan_id": loan_id})
 
-    result = graph.invoke({
-        "question": question,
-        "loan_id": loan_id,
-        "top_k": top_k,
-        "query_vector": None,
-        "chunks": [],
-        "context": "",
-        "answer": "",
-        "sources": [],
-        "trace_id": trace.id,
-        "embedder_id": embedder_id,
-    })
+    try:
+        result = graph.invoke({
+            "question": question,
+            "loan_id": loan_id,
+            "top_k": top_k,
+            "query_vector": None,
+            "chunks": [],
+            "context": "",
+            "answer": "",
+            "sources": [],
+            "trace_id": trace.id,
+            "embedder_id": embedder_id,
+        })
+    except httpx.TimeoutException as e:
+        # Ollama timed out — record in trace before re-raising
+        elapsed_ms = int((time.perf_counter() - t_retrieve) * 1000)
+        span_retrieve.end(
+            output={"error": "timeout", "latency_ms": elapsed_ms},
+            level="ERROR",
+        )
+        trace.update(
+            output={"error": f"LLM timeout after {elapsed_ms}ms"},
+            metadata={"timed_out": True, "elapsed_ms": elapsed_ms, "timeout_setting": OLLAMA_TIMEOUT},
+            level="ERROR",
+        )
+        langfuse.flush()
+        raise
+    except Exception as e:
+        elapsed_ms = int((time.perf_counter() - t_retrieve) * 1000)
+        span_retrieve.end(output={"error": str(e), "latency_ms": elapsed_ms}, level="ERROR")
+        trace.update(
+            output={"error": str(e)},
+            metadata={"failed": True, "elapsed_ms": elapsed_ms},
+            level="ERROR",
+        )
+        langfuse.flush()
+        raise
 
-    retrieval_ms = int((time.perf_counter() - t0) * 1000)
+    retrieval_ms = int((time.perf_counter() - t_retrieve) * 1000)
     span_retrieve.end(output={"chunk_count": len(result["chunks"]), "latency_ms": retrieval_ms})
 
-    span_gen = trace.span(name="generate", input={"context_chars": len(result["context"])})
-    span_gen.end(output={"answer_chars": len(result["answer"])})
+    # ── Generate span — timed separately from retrieval ──
+    t_gen = time.perf_counter()
+    span_gen = trace.span(name="generate", input={"context_chars": len(result["context"]), "chunk_count": len(result["chunks"])})
+    gen_ms = int((time.perf_counter() - t_gen) * 1000)
+    span_gen.end(output={"answer_chars": len(result["answer"]), "latency_ms": gen_ms})
 
     trace.update(
         output={"answer": result["answer"], "sources": result["sources"]},
-        metadata={"chunk_count": len(result["chunks"]), "retrieval_ms": retrieval_ms},
+        metadata={
+            "chunk_count": len(result["chunks"]),
+            "retrieval_ms": retrieval_ms,
+            "total_ms": int((time.perf_counter() - t_retrieve) * 1000),
+        },
     )
     langfuse.flush()
 
