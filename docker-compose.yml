@@ -113,7 +113,7 @@ services:
       - REDIS_URL=redis://redis:6379
       - OLLAMA_URL=http://ollama:11434
       - EMBEDDING_MODEL=paraphrase-multilingual-MiniLM-L12-v2
-      - LLM_MODEL=tinyllama
+      - LLM_MODEL=mistral
       - LLM_MODEL_MULTILINGUAL=mistral
       - OLLAMA_NUM_THREAD=4
       - OLLAMA_TIMEOUT=120

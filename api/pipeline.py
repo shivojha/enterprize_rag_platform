@@ -10,8 +10,8 @@ import os
 import time
 
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
-LLM_MODEL = os.getenv("LLM_MODEL", "tinyllama")          # fast default for English
-LLM_MODEL_MULTILINGUAL = os.getenv("LLM_MODEL_MULTILINGUAL", "mistral")  # used for non-English
+LLM_MODEL = os.getenv("LLM_MODEL", "mistral")
+LLM_MODEL_MULTILINGUAL = os.getenv("LLM_MODEL_MULTILINGUAL", "mistral")
 OLLAMA_NUM_THREAD = int(os.getenv("OLLAMA_NUM_THREAD", "4"))
 OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "120"))
 COLLECTION_NAME = "mortgage_docs"
