@@ -42,5 +42,6 @@ VALUES
   ('LN-2024-002', 'Maria Garcia',  'Conventional', 432000.00,   '456 Elm Ave, Dallas TX 75201',        'document_review',       'active',   748, 34.70, 20.00, 7.125, '2024-02-15'),
   ('LN-2024-003', 'Robert Johnson','VA',            432437.50,   '789 Pecan Blvd, San Antonio TX 78201','underwriting',          'active',   712, 33.10, 0.00,  6.875, '2024-01-10'),
   ('LN-2024-004', 'Sarah Chen',    'Jumbo',        1480000.00,  '1201 River Oaks Blvd, Houston TX 77019','approved',            'active',   798, 29.20, 20.00, 7.125, '2024-01-20'),
-  ('LN-2024-005', 'Michael Brown', 'FHA Refinance', 291250.00,  '567 Birch Lane, Austin TX 78745',     'closing',               'active',   695, 30.20, 0.00,  5.990, '2024-02-28')
+  ('LN-2024-005', 'Michael Brown', 'FHA Refinance', 291250.00,  '567 Birch Lane, Austin TX 78745',     'closing',               'active',   695, 30.20, 0.00,  5.990, '2024-02-28'),
+  ('policy',      'FHA Guidelines','Policy',         0.00,       'N/A',                                 'reference',             'active',   NULL, NULL, NULL,  NULL, '2024-01-01')
 ON CONFLICT DO NOTHING;
