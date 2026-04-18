@@ -112,7 +112,7 @@ services:
       - POSTGRES_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       - REDIS_URL=redis://redis:6379
       - OLLAMA_URL=http://ollama:11434
-      - EMBEDDING_MODEL=all-MiniLM-L6-v2
+      - EMBEDDING_MODEL=paraphrase-multilingual-MiniLM-L12-v2
       - LLM_MODEL=tinyllama
       - OLLAMA_NUM_THREAD=4
       - OLLAMA_TIMEOUT=90
@@ -141,7 +141,7 @@ services:
       - POSTGRES_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       - REDIS_URL=redis://redis:6379
       - OLLAMA_URL=http://ollama:11434
-      - EMBEDDING_MODEL=all-MiniLM-L6-v2
+      - EMBEDDING_MODEL=paraphrase-multilingual-MiniLM-L12-v2
     depends_on:
       qdrant:
         condition: service_healthy

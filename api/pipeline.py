@@ -107,10 +107,11 @@ def no_context(state: RAGState) -> RAGState:
 
 
 def generate_answer(state: RAGState) -> RAGState:
-    # Shorter prompt = fewer tokens to process = faster CPU inference
+    # Respond in the same language as the question for multilingual support
     prompt = (
         "You are a mortgage underwriting assistant. "
-        "Answer in 2-3 sentences using only the context. Cite numbers where available.\n\n"
+        "Answer in 2-3 sentences using only the context. Cite numbers where available. "
+        "Reply in the same language as the question.\n\n"
         f"CONTEXT:\n{state['context']}\n\n"
         f"QUESTION: {state['question']}\nANSWER:"
     )
