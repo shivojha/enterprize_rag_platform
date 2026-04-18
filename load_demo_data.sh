@@ -15,7 +15,7 @@ ingest() {
   local FILE=$3
   echo "  → $LOAN_ID / $DOC_TYPE"
   RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "$API/ingest/$LOAN_ID?doc_type=$DOC_TYPE" -F "file=@$FILE")
-  BODY=$(echo "$RESPONSE" | head -n -1)
+  BODY=$(echo "$RESPONSE" | sed '$d')
   CODE=$(echo "$RESPONSE" | tail -n 1)
   if [ "$CODE" = "200" ] && [ -n "$BODY" ]; then
     JOB=$(echo "$BODY" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('job_id','?')[:8])" 2>/dev/null || echo "?")
@@ -27,7 +27,7 @@ ingest() {
 
 status_check() {
   RESPONSE=$(curl -s -w "\n%{http_code}" "$API/loans/$1/status")
-  BODY=$(echo "$RESPONSE" | head -n -1)
+  BODY=$(echo "$RESPONSE" | sed '$d')
   CODE=$(echo "$RESPONSE" | tail -n 1)
   if [ "$CODE" = "200" ] && [ -n "$BODY" ]; then
     echo "$BODY" | python3 -c "
